@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+
+{% set headerWhiteClass = true %}
+
+{% block headerBannerTitle %}
+    404
+{% endblock %}
+
+{% block pageContent %}
+
+    <section class="not-found-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 page-not-found-block">
+                    <div class="page-not-found-text">Page Not Found</div>
+                    <p>The link you are trying to open is either expired or does not exist.</p>
+                    <p>Please <a href="/register">register</a> or <a href="/login">login</a> to use all features of the website or <a href="/contact">contact</a> Administrator for questions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

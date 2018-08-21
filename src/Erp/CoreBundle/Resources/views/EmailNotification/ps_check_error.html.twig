@@ -1,0 +1,14 @@
+{% extends 'ErpCoreBundle::EmailNotification/common.html.twig' %}
+
+{% block title %}
+	An error has occurred during Payment operation!
+{% endblock %}
+
+{% block message %}
+	An error has occurred during Payment operation for user:
+	{{ customerName }},
+	ID: {{ customerId }}!
+
+	See PaySimple dashboard for details.
+    <br><br>
+{% endblock %}

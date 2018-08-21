@@ -1,0 +1,137 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% form_theme form _self %}
+{% form_theme autoWithdrawalForm _self %}
+
+{%- block date_widget -%}
+    {% set type = 'text' %}
+    {{ block('form_widget_simple') }}
+{%- endblock date_widget -%}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <div class="page-content">
+        <section id="managers-listings-edit" class="listings profile">
+            <div class="container">
+                <div class="row">
+                    <div class="title-block">
+                        <h1 class="bold-text">Edit Property Settings</h1>
+                    </div>
+                </div>
+
+                {% if property.id %}
+                    <div class="row">
+                        <div class="col-xs-12 features property-tab">
+                            <a class="btn red-btn tab-btn"
+                               href="{{ path('erp_property_listings_edit', {'propertyId': property.id}) }}">Property
+                                Details</a>
+                            <a class="btn red-btn tab-btn active "
+                               href="{{ path('erp_property_property_settings_edit', {'propertyId': property.id}) }}">Edit
+                                Payment Settings</a>
+                            <a class="btn red-btn tab-btn"
+                               href="{{ path('erp_property_listings_edit_images', {'propertyId': property.id}) }}">Property
+                                Images</a>
+                            <a class="btn red-btn tab-btn"
+                               href="{{ path('erp_property_listings_edit_documents', {'propertyId': property.id}) }}">Property
+                                Documents</a>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+                {%- if property.settings.allowAutoDraft -%}
+                    {% if (property.tenantUser) %}
+                        {%- if property.tenantUser.isAgreeAutoWithdrawal -%}
+                            {{ form_start(autoWithdrawalForm, {'action': path('erp_property_scheduled_stop_auto_withdrawal', {'user': property.tenantUser.id}) }) }}
+                            <div class="row">
+                                <div class="col-md-10 col-md-offset-1 listings-block">
+                                    <div class="listing-block">
+                                        <p>To stop auto-withdrawals please choose date and submit</p>
+                                        <div class="desc-block">
+                                            <div class="listing-form form-horizontal edit-prop-form">
+                                                <div class="prop-description form-group">
+                                                    <div class="prop-info">
+                                                        {{ form_label(autoWithdrawalForm.endAt) }}
+                                                        {{ form_widget(autoWithdrawalForm.endAt, {'attr': {'class': 'form-control date'}}) }}
+                                                        {{ form_custom_errors.widget(autoWithdrawalForm.endAt) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 submit-row">
+                                {{ form_widget(autoWithdrawalForm.submit, {'attr': {'class': 'btn red-btn'}}) }}
+                            </div>
+                            {{ form_end(autoWithdrawalForm) }}
+                        {%- endif -%}
+                    {%- endif -%}
+                {%- endif -%}
+
+                <div class="row">
+                    {{ form_start(form, { attr: {'id' : 'property-edit-form', 'class': 'form-horizontal'}, 'enctype': form_enctype(form)}) }}
+                    <div class="col-md-10 col-md-offset-1 listings-block">
+                        <div class="listing-block">
+                            {{ form_custom_errors.widget(form) }}
+                            <p>To set Property status to "Rented" please add Tenant to it on Listings page.</p>
+
+                            <div class="desc-block">
+                                <div class="listing-form form-horizontal edit-prop-form">
+                                    <div class="prop-description form-group">
+                                        <div class="prop-info">
+                                            {{ form_label(form.dayUntilDue) }}
+                                            {{ form_widget(form.dayUntilDue) }}
+                                            {{ form_custom_errors.widget(form.dayUntilDue) }}
+                                        </div>
+                                        <div class="prop-info">
+                                            {{ form_label(form.paymentAmount) }}
+                                            {{ form_widget(form.paymentAmount) }}
+                                            {{ form_custom_errors.widget(form.paymentAmount) }}
+                                        </div>
+                                        <div class="prop-info">
+                                            {{ form_label(form.allowPartialPayments) }}
+                                            {{ form_widget(form.allowPartialPayments) }}
+                                            {{ form_custom_errors.widget(form.allowPartialPayments) }}
+                                        </div>
+                                        <div class="prop-info">
+                                            {{ form_label(form.allowCreditCardPayments) }}
+                                            {{ form_widget(form.allowCreditCardPayments) }}
+                                            {{ form_custom_errors.widget(form.allowCreditCardPayments) }}
+                                        </div>
+
+                                        {%- set agreeAutoWithdrawalText -%}
+                                            {%- if property.settings.allowAutoDraft -%}
+                                                {% if (property.tenantUser) %}
+                                                    {%- if property.tenantUser.isAgreeAutoWithdrawal -%}
+                                                        Agree the auto-withdrawal
+                                                    {%- else -%}
+                                                        Disagree the auto-withdrawal
+                                                    {%- endif -%}
+                                                {%- endif -%}
+                                            {%- endif -%}
+                                        {%- endset -%}
+                                        <div class="prop-info">
+                                            {{ form_label(form.allowAutoDraft) }}
+                                            {{ form_widget(form.allowAutoDraft) }}
+                                            {{ form_custom_errors.widget(form.allowAutoDraft) }} {{ agreeAutoWithdrawalText ? (agreeAutoWithdrawalText) : '' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 submit-row">
+                    <a class="back-dashboard listings-back" href="{{ path('erp_property_listings_all') }}">Back to
+                        Listings</a>
+                    <button type="submit" class="btn red-btn">Submit</button>
+                </div>
+                <div class="hide"> {{ form_end(form) }}</div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

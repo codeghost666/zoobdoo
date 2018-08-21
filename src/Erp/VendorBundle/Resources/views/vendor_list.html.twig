@@ -1,0 +1,76 @@
+<div class="col-md-4 listings-block">
+    <div class="listing-block listing-section" id="images-edit">
+
+        <div class="desc-block">
+            <div class="edit-block">
+                <div class="listings-edit">
+                    <span class="pencil"></span>
+                    <a href="{{ path('erp_vendor_edit', {'vendorId' : property.getId()}) }}" role="popup">Edit</a>
+                </div>
+
+                <span class="separate-image">|</span>
+
+                <div class="listings-edit">
+                    <span class="pencil"></span>
+                    <a href="{{ path('erp_vendor_delete', {'vendorId' : property.getId()}) }}" >
+                        Remove
+                    </a>
+                </div>
+            </div>
+            <div class="listing-form">
+                <div class="prop-description">
+                    <div class="prop-info">
+                        <span class="prop-label">Email</span>
+                        <span class="prop-details">{{ property.email }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Name</span>
+                        <span class="prop-details">{{ property.name }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Company of Name</span>
+                        <span class="prop-details">{{ property.companyName }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Business Type</span>
+                        <span class="prop-details">{{ property.businessType }}</span>
+                    </div>
+
+                    <br>
+                    <div class="tenant-title bold-text">
+                        What kind of products/services does your company offer?
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Company Website</span>
+                        <span class="prop-details prop-price">{{ property.website }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Company Address</span>
+                        <span class="prop-details">{{ property.address }}</span>
+                    </div>
+
+                    <br>
+                    <div class="tenant-title bold-text">
+                        Name of person representing the Company
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">First Name</span>
+                        <span class="prop-details">{{ property.firstName }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Last Name</span>
+                        <span class="prop-details">{{ property.lastName }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Contact Email</span>
+                        <span class="prop-details">{{ property.contactEmail }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Contact Phone</span>
+                        <span class="prop-details">{{ property.contactPhone }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+    {{ parent() }}
+
+    <section id="service-request" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Service Requests</h1>
+                </div>
+            </div>
+            {% if not user.isReadOnlyUser() %}
+                {% if tenants is defined and tenants|length %}
+                    <div class="row messages-row">
+                        <div class="col-md-3 companions-col default-companions-col">
+                            <ul class="companions-list">
+                                {% if tenants %}
+                                    {% for tenant in tenants %}
+                                        <li class="companion-name{% if currentTenant.id == tenant.id %} current{% endif %}">
+                                            <a href="{{ path('erp_user_service_request', {'toUserId': tenant.id}) }}">{{ tenant.firstName|e }} {{ tenant.lastName|e }}
+                                                <span class="messages-total">({{ tenant.totalServiceRequests }})</span>
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="col-xs-6 companions-col mobile-companions-col">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Select tenant <span class="select-container"></span></button>
+                                <ul class="companions-list dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    {% if tenants %}
+                                        {% for tenant in tenants %}
+                                            <li class="companion-name{% if currentTenant.id == tenant.id %} current{% endif %}">
+                                                <a href="{{ path('erp_user_service_request', {'toUserId': tenant.id}) }}">{{ tenant.firstName|e }} {{ tenant.lastName|e }}
+                                                    <span class="messages-total">({{ tenant.totalServiceRequests }}) </span>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-9 messages-col">
+                            <h4 class="companion-messages-name">{{ currentTenant.firstName }} {{ currentTenant.lastName }}</h4>
+                            {% if serviceRequests %}
+                                <ul class="messages-history">
+                                    {% for serviceRequest in serviceRequests %}
+                                        <li class="request-item"><span class="messages-subject">{{ serviceRequestTypes[serviceRequest.typeId] }}</span><span class="messages-time">{{ serviceRequest.date|date('m/d/Y') }}</span>
+                                            <p class="messages-text">{{ serviceRequest.text }}</p>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <div class="text-center">
+                                    You haven't received Service Requests from this Tenant yet
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-center">
+                        You have no Tenants and no Service Requests yet.
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="text-center">
+                    You have no Tenants and no Service Requests yet.<br/>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

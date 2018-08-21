@@ -1,0 +1,144 @@
+<footer>
+    <div class="container default-footer">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h2>Company</h2>
+                <ul>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'about'}) }}">About Us</a></li>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'how-it-works'}) }}">How It Works</a></li>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'faq'}) }}">FAQ</a></li>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'contact'}) }}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Features</h2>
+                <ul>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'manager-features'}) }}">Property Managers</a></li>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'tenant-features'}) }}">Tenants</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Property Managers</h2>
+                <ul>
+                    <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                    <li><a href="{{ path('fos_user_registration_register') }}">Sign up</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Tenants</h2>
+                <ul>
+                    <li><a role="popup" href="{{ path('erp_site_send_invite_to_manager') }}">Invite a Property Manager</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mobile-footer">
+        <div class="row">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Company<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'about'}) }}">About Us</a></li>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'how-it-works'}) }}">How It Works</a></li>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'faq'}) }}">FAQ</a></li>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'contact'}) }}">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Features<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'manager-features'}) }}">Property Managers</a></li>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'tenant-features'}) }}">Tenants</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Property Managers<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                                <li><a href="{{ path('fos_user_registration_register') }}">Sign up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Tenants<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a role="popup" href="{{ path('erp_site_send_invite_to_manager') }}">Invite a Property Manager</a></li>
+                                <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="copyright-dark">
+        <div class="container">
+            <span class="copyright" title="{{ app_version }}">&copy; Copyright <span class="footer-date"></span> Zoobdoo  {% if (app_version is defined) %}
+                {% set app_version_array = app_version|split('-') %}{{ app_version_array.0 }}
+                {% endif %}</span>
+
+                <div class="social-icons-container">
+                    <ul class="social-icons">
+                        <li><a href="https://www.linkedin.com/company/zoobdoo-com" target="_blank"><img src="{{ asset('bundles/erpsite/images/li.png') }}"></a></li>
+                        <li><a href="https://www.facebook.com/zoobdoomanager/" target="_blank"><img src="{{ asset('bundles/erpsite/images/fb.png') }}"></a></li>
+                        <li><a href="https://twitter.com/Zoobdoo_" target="_blank"><img src="{{ asset('bundles/erpsite/images/tw.png') }}"></a></li>
+                        <li><a href="https://www.pinterest.com/zoobdoocom/pins/" target="_blank"><img src="{{ asset('bundles/erpsite/images/pi.png') }}"></a></li>
+
+                    </ul>
+                </div>
+                <ul class="copyright-links">
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'terms-of-service'}) }}">Terms of Service</a>&nbsp; | &nbsp;</li>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'privacy-policy'}) }}">Privacy Policy</a>&nbsp; | &nbsp;</li>
+                    <li><a href="{{ path('erp_site_static_page', {'slug':'sitemap'}) }}">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>

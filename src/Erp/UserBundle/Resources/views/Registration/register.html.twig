@@ -1,0 +1,62 @@
+{% extends '::base.html.twig' %}
+
+{% set headerWhiteClass = true %}
+
+{% block paramsToJs %}
+    <input type="hidden" name="route__erp_core_get_cities_by_state_code" value="{{ path('erp_core_get_cities_by_state_code') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/register.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/city.controller.js') }}"></script>
+{% endblock %}
+
+{% block headerBannerTitle %}
+    {% if app.user %}
+        {% if app.user.hasRole(role) %}
+            Manager
+        {% elseif app.user.hasRole(role) %}
+            Landlord
+        {% else %}
+            Tenant
+        {% endif %}
+    {% else %}
+        Welcome
+    {% endif %}
+{% endblock %}
+
+{% block pageContent %}
+
+    <section id="register-form-tenants" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Register</h1>
+                </div>
+            </div>
+
+            {% if isRegisterAccept is defined and isRegisterAccept %}
+                <div class="row">
+                    <div class="col-sm-12 register-block">
+                        <p>Please, check your email to complete registration</p>
+                    </div>
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <p>Create an account now for free! With just some basic information below you can view and obtain access to 
+                        all the services Zoobdoo has to offer. Register below for your 30 Day trail now!
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        {% include "ErpUserBundle:Registration:register-form.html.twig" %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

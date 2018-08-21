@@ -1,0 +1,99 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <section id="messages" class="register-form ">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Messages</h1>
+                </div>
+            </div>
+            <div class="hide">
+                {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+            </div>
+            {% if not user.isReadOnlyUser() %}
+                {% if companions is defined and companions|length %}
+                    <div class="row messages-row">
+                        <div class="col-md-3 companions-col default-companions-col">
+                            <ul class="companions-list">
+                                {% if companions %}
+                                    {% for companion in companions %}
+                                        {% set totalMessages = companion['totalMessages'] %}
+                                        {% set companion = companion[0] %}
+                                        {% set unreadMessages = count_unread_messages(user, companion) %}
+                                        <li class="companion-name{% if currentCompanion.id == companion.id %} current{% endif %}">
+                                            <a href="{{ path('erp_user_messages', {'toUserId':companion.id}) }}">{{ companion.firstName|e }} {{ companion.lastName|e }}
+                                                <span class="messages-total">({{ totalMessages }})</span>
+                                            </a>
+                                        </li>
+
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="col-xs-6 companions-col mobile-companions-col">
+                            <div class="dropdown">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">{% if user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_MANAGER')) %}Select Tenant{% else %}Select Property Manager{% endif %}
+                                    <span class="select-container"></span></button>
+                                <ul class="companions-list dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    {% if companions %}
+                                        {% for companion in companions %}
+                                            {% set totalMessages = companion['totalMessages'] %}
+                                            {% set companion = companion[0] %}
+                                            {% set unreadMessages = count_unread_messages(user, companion) %}
+
+                                            <li class="companion-name{% if currentCompanion.id == companion.id %} current{% endif %}">
+                                                <a href="{{ path('erp_user_messages', {'toUserId':companion.id}) }}">{{ companion.firstName|e }} {{ companion.lastName|e }}
+                                                    <span class="messages-total">({{ totalMessages }})</span>
+                                                </a>
+                                                {% if unreadMessages %}
+                                                    <div class="messages-count-icon">
+                                                        <span class="messages-unread-count messages-count">{{ unreadMessages }}</span>
+                                                    </div>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-9 messages-col request-messages">
+                            <h4 class="companion-messages-name">{{ currentCompanion.firstName }} {{ currentCompanion.lastName }}</h4>
+                            <ul class="messages-history">
+                                {% if messages %}
+                                    {% for message in messages %}
+                                        <li class="messages-item{% if user.id == message.fromUser.id %} sent-message{% else %} received-message{% endif %}" >
+                                            <span class="messages-subject">{{ message.subject }}</span><span class="messages-time" title="{{ message.createdDate|date('m/d/Y H:i:s') }}">{{ message.createdDate|time_ago_in_words(false, true) }}</span>
+                                            <p class="messages-text">{{ message.text }}</p>
+                                        </li>
+                                    {% endfor %}
+
+                                {% else %}
+                                    <div class="text-center">
+                                        You haven't received Messages from
+                                        {{ app.user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_MANAGER')) ? ' this Tenant' : ' your Manager' }}
+                                        yet
+                                    </div>
+                                {% endif %}
+                            </ul>
+                            {% include "ErpUserBundle:Messages:messages-form.html.twig" %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="text-center">
+                        You have no Tenants and no Messages yet.
+                    </div>
+                {% endif %}
+            {% else %}
+                <div class="text-center">
+                    You have no Tenants and no Messages yet.<br/>
+                    In order to add Tenants you should have paid account activated by Administrator.
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

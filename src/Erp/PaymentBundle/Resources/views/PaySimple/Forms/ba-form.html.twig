@@ -1,0 +1,83 @@
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+
+{% set cc = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::CREDIT_CARD') %}
+
+{{ form_start(form, { attr: {'class': 'form-horizontal cc-form ba-form', 'novalidate': 'novalidate'}, 'enctype': form_enctype(form)}) }}
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-6">
+                {{ form_label(form.firstName) }}
+                {{ form_widget(form.firstName) }}
+                {{ form_custom_errors.widget(form.firstName) }}
+            </div>
+            <div class="col-xs-6">
+                {{ form_label(form.lastName) }}
+                {{ form_widget(form.lastName) }}
+                {{ form_custom_errors.widget(form.lastName) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-9">
+                {{ form_label(form.routingNumber) }}
+                {{ form_widget(form.routingNumber) }}
+                {{ form_custom_errors.widget(form.routingNumber) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-12">
+                {{ form_label(form.accountNumber) }}
+                {{ form_widget(form.accountNumber) }}
+                {{ form_custom_errors.widget(form.accountNumber) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-9">
+                {{ form_label(form.bankName) }}
+                {{ form_widget(form.bankName) }}
+                {{ form_custom_errors.widget(form.bankName) }}
+            </div>
+            {% if form.isDefault is defined %}
+                <div class="col-xs-3">
+                    {{ form_label(form.isDefault) }}
+                    {{ form_widget(form.isDefault) }}
+                    {{ form_custom_errors.widget(form.isDefault) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-12 cc-form-footer">
+                {% if user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_MANAGER')) and (not psCustomer or psCustomer.psRecurringPayments|length == 0) and user.isActiveMonthlyFee %}
+                    <h3>Amount: ${{ amount }} /month</h3>
+                {% else %}
+                    <br/>
+                {% endif %}
+                {{ form_widget(form.submit) }}
+                <span class="or-text">OR</span>
+                <a href="{{ path('erp_payment_ps_create_account', {'type' : cc}) }}" class="back-dashboard btn">Add Credit Card</a>
+            </div>
+        </div>
+    </div>
+
+	{% if not psCustomer and user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_MANAGER')) and user.isActiveMonthlyFee %}
+		<div class="row">
+			<div class="form-group">
+				<div class="col-xs-16"><br/>
+					<label for="">You will be charged Zoobdoo monthly fee starting from today.</label>
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+{{ form_end(form) }}

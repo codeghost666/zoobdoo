@@ -1,0 +1,14 @@
+{% extends 'ErpCoreBundle::EmailNotification/common.html.twig' %}
+
+{% block title %}
+    Manager Contact Information
+{% endblock %}
+
+{% block message %}
+    {{ customerName }}<br/>
+    {{ routingNumber }}<br/>
+    {{ accountNumber }}<br/>
+    {{ bankName }}<br/>
+    {{ customerEmail }}<br/><br/>
+    <b>Please, save this information in secure place and delete this email!</b>
+{% endblock %}

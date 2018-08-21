@@ -1,0 +1,30 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{%- block date_widget -%}
+    {% set type = 'text' %}
+    {{ block('form_widget_simple') }}
+{%- endblock date_widget -%}
+
+{% block pageContent %}
+    {{ parent() }}
+    <section id="managers-accounting" class="profile">
+        <div class="container">
+
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+            <div class="row profile-widget-row profile-widget-custom">
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <a
+                                class="btn red-btn"
+                                type="submit"
+                                href="{{ path('erp_workorder_create') }}"
+                        >Creating WorkOrder</a>
+                    </div>
+                </div>
+
+                {{ render(controller('ErpWorkorderBundle:Workorder:showWorkorder')) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

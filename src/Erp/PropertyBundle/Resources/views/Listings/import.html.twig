@@ -1,0 +1,92 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <div class="page-content">
+        <section id="managers-listings" class="listings profile import-section">
+            <div class="container">
+                <div class="row">
+                    <div class="title-block">
+                        <h1 class="bold-text">Import Properties</h1>
+                    </div>
+                </div>
+
+                {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if properties|length %}
+                            <p>You are about to import the properties shown below into your listings. Only valid properties are to be imported (records with errors are omitted).<br/>
+                                You will be charged <span class="errors">${{ amount }}</span> for importing of {{ properties|length }} property(ies). One property cost is ${{ propertyFee }}.
+                                Click Import button to start the process or Cancel to return back to listings.
+                            </p>
+                        {% else %}
+                            <p>You have nothing to import. Please upload a valid CSV file.</p>
+                        {% endif %}
+                        <hr/>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        {% if properties|length %}
+                            <div class="import-table">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Property Name</th>
+                                            <th>State</th>
+                                            <th>City</th>
+                                            <th>Address</th>
+                                            <th>Zip</th>
+                                            <th>Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% if properties %}
+                                            {% for property in properties %}
+                                                <tr>
+                                                    <th>{{ property.name }}</th>
+                                                    <th>{{ property.stateCode }}</th>
+                                                    <th>{{ property.city }}</th>
+                                                    <th>{{ property.address }}</th>
+                                                    <th>{{ property.zip }}</th>
+                                                    <th>{{ property.price }}$</th>
+                                                </tr>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <form action="{{ path('erp_property_listings_import') }}" method="POST">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-footer">
+                                            <button type="submit" class="btn red-btn">Import</button>
+                                            <a href="{{ path('erp_property_listings_all') }}" class="btn red-btn">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-footer">
+                                        <a href="{{ path('erp_property_listings_all') }}" class="back-dashboard btn">Back to Listings</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

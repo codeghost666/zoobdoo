@@ -1,0 +1,132 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/Chart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/chart-decorator.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/cashflows-chart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/invoices-chart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/properties-history-chart.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/late-rent-payment.controller.js') }}"></script>
+    <script src="https://cdn.plaid.com/link/v2/stable/link-initialize.js"></script>
+{% endblock %}
+
+{% block pageContent %}
+    {{ parent() }}
+    <section id="managers-profile" class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Dashboard</h1>
+                </div>
+            </div>
+
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+
+            <div class="row profile-widget-row height_custom">
+                {{ render(controller('ErpUserBundle:Dashboard:showPaymentDetails')) }}
+            </div>
+            <div class="row profile-widget-row profile-widget-custom">
+                {{ render(controller('ErpUserBundle:Dashboard:showTransactions')) }}
+            </div>
+            <div class="row profile-widget-row height_custom">
+                {{ render(controller('ErpUserBundle:Dashboard:showCashflows')) }}
+            </div>
+            <div class="row profile-widget-row profile-widget-custom">
+                {{ render(controller('ErpSmartMoveBundle:SmartMove:backgroundCreditCheckWidget')) }}
+                {{ render(controller('ErpUserBundle:Dashboard:showProperties')) }}
+            </div>
+            <div class="row profile-widget-row profile-widget-custom">
+                {{ render(controller('ErpUserBundle:Dashboard:showLateRentPayments')) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascript_inline %}
+    <script>
+        (function ($) {
+            var linkHandler = Plaid.create({
+                env: '{{ plaid_env }}',
+                clientName: 'Zoobdoo',
+                key: '{{ plaid_public_key }}',
+                product: ['auth'],
+                selectAccount: true,
+                onSuccess: function (public_token, metadata) {
+                    $.blockUI({message: 'Account verifying... Please wait.'});
+                    $.ajax({
+                        url: '{{ path("erp_payment_stripe_verify_bank_account") }}',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: {
+                            publicToken: public_token,
+                            accountId: metadata.account_id
+                        },
+                        success: function (response) {
+                            if (response.redirect) {
+                                $.blockUI({message: 'Now you\'ll be redirected.'});
+                                // $.unblockUI();
+                                document.location = response.redirect;
+                            }
+                        }
+                    });
+                },
+                onExit: function (err, metadata) {
+                    if (err != null) {
+
+                    }
+                }
+            });
+
+            function processResponse(response)
+            {
+                if (response.redirect) {
+                    document.location = response.redirect;
+                } else {
+                    var modalBody = $('#epr-modal-popup').find('.modal-body');
+
+                    modalBody.html(response.html);
+                    $('#epr-modal-popup').find('.modal-title').html(response.modalTitle);
+                    $('#epr-modal-popup').modal('show');
+
+                    var form = modalBody.find('form');
+
+                    if (response.error) {
+                        form.find('button[type=submit]').prop('disabled', false);
+                        $('#error').html(response.error);
+                    }
+
+                    form.submit(function (e) {
+                        var $form = $(this);
+                        $form.find('button[type=submit]').prop('disabled', true);
+
+                        $.ajax({
+                            type: 'POST',
+                            cache: false,
+                            url: form.attr('action'),
+                            data: form.serialize(),
+                            async: true,
+                            dataType: 'json',
+                            success: function (response) {
+                                processResponse(response);
+                            }
+                        });
+
+                        return false;
+                    });
+                }
+            }
+
+            $('#verify-ba').click(function () {
+                linkHandler.open();
+            });
+
+            $('[linked-element]').click(function () {
+                var id = $(this).attr('linked-element');
+                $(id).toggle();
+            });
+        })(jQuery);
+    </script>
+{% endblock %}

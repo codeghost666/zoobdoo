@@ -1,0 +1,59 @@
+{% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+
+{{ form_start(form, { attr: {'class': 'form-horizontal', 'novalidate': 'novalidate'}, 'enctype': form_enctype(form)}) }}
+<div class="row">
+    <div class="col-sm-9">
+        <div class="form-group">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_custom_errors.widget(form.name) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="form-group">
+            {{ form_label(form.email) }}
+            {{ form_widget(form.email) }}
+            {{ form_custom_errors.widget(form.email) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="form-group">
+            {{ form_label(form.phone) }}
+            {{ form_widget(form.phone) }}
+            {{ form_custom_errors.widget(form.phone) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="form-group">
+            {{ form_label(form.subject) }}
+            {{ form_widget(form.subject) }}
+            {{ form_custom_errors.widget(form.subject) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="form-group">
+            {{ form_label(form.message) }}
+            {{ form_widget(form.message) }}
+            {{ form_custom_errors.widget(form.message) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <div class="form-group">
+            <div class="button-wrap">
+                {{ form_widget(form.submit) }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

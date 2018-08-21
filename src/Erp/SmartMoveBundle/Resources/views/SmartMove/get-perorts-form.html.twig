@@ -1,0 +1,26 @@
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+
+{{ form_start(form, { attr: {'class': 'form-horizontal'}, 'enctype': form_enctype(form)}) }}
+<div class="row">
+    <div class="form-group">
+        <div class="col-xs-11 dropdown-col">
+            {{ form_label(form.smRenters) }}
+            <div class="select-container">
+                {{ form_widget(form.smRenters) }}
+            </div>
+        </div>
+        <div class="col-xs-11 with-submit-btn">
+            {% if user.isReadOnlyUser() %}
+                <a type="submit" class="btn edit-btn btn-space" href="{{ path('erp_user_profile_read_only_popup') }}"
+                   role="popup">GET REPORT</a>
+            {% else %}
+                {{ form_widget(form.submit) }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="hide">
+    {{ form_end(form) }}
+</div>
+
+

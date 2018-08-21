@@ -1,0 +1,100 @@
+{% form_theme form _self %}
+
+{%- block date_widget -%}
+    {% set type = 'text' %}
+    {{ block('form_widget_simple') }}
+{%- endblock date_widget -%}
+
+<div class="col-md-12 col-xs-6 profile-widget-item widget-last">
+    <div class="row widget-title-row">
+        <div class="login-block-title bold-text">Accounting Ledger</div>
+
+    </div>
+    {{ form_start(form) }}
+    <div class="form-group form-accounting">
+        <div class="col-xs-12 col-md-7">
+            {{ form_label(form.keyword) }}
+            {{ form_widget(form.keyword, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="col-xs-12 col-md-2">
+            {{ form_label(form.dateFrom) }}
+            {{ form_widget(form.dateFrom, {'attr': {'class': 'form-control date'}}) }}
+        </div>
+        <div class="col-xs-12 col-md-2">
+            {{ form_label(form.dateTo) }}
+            {{ form_widget(form.dateTo, {'attr': {'class': 'form-control date'}}) }}
+        </div>
+        <div class="col-xs-12 col-md-1">
+            <label for="filter">&nbsp;</label><br/>
+            <button id="filter" name="filter" class="btn red-btn" type="submit">Find</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-xs-2 col-md-2">Date</th>
+            <th class="col-xs-2 col-md-2">Transaction</th>
+            <th class="col-xs-1 col-md-1">Type</th>
+            <th class="col-xs-4 col-md-4">Description</th>
+            <th class="col-xs-1 col-md-1">Status</th>
+            <th class="col-xs-1 col-md-1" nowrap>Income</th>
+            <th class="col-xs-1 col-md-1">Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if (pagination|length) %}
+            {% for item in pagination %}
+                <tr>
+                    <td class="text-center">
+                        {{ item.created|date('M d, Y') }}<br/>
+                        {{ item.created|date('h:i:s') }}
+                    </td>
+                    <td class="text-left">
+                        {{ item.customer ? item.customer.user.fullName : '' }}<br/>
+                        {{ item.paymentMethodDescription }}
+                    </td>
+                    <td class="text-left" nowrap>{{ item.internalType|internal_type }}</td>
+                    <td class="text-left">
+
+                        {% if item.metadata is defined  %}
+                            {% if item.metadata.description is defined %}
+                                <em>{{ item.metadata.description }}</em><br/>
+                            {% endif %}
+                        {% endif %}
+
+                    </td>
+                    <td>{{ item.status|transaction_status }}</td>
+                    <td class="text-left">
+                        {{ item.amount|stripe_money }}
+                    </td>
+                    <td class="text-left">{{ item.balance|stripe_money }}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="7" class="text-center">No matches.</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    {% if (pagination|length) %}
+        <div class="container-fluid">
+            <div class="row">
+                <div class="form-group">
+                    <button
+                            role="button"
+                            class="btn red-btn"
+                            onclick="location='{{ pdf_link }}'">
+                        Export as PDF
+                    </button>
+                    <a class="btn red-btn" target="_blank" href="{{ path('erp_user_accounting_list_accounting_ledger') }}">View All</a>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>

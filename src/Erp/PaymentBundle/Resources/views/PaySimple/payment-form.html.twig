@@ -1,0 +1,61 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpproperty/js/available-properties.controller.js') }}"></script>
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <section id="register-form-tenants" class="register-form cc-form-wrap">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">
+                        {{ type == constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::CREDIT_CARD') ? 'Credit Card' : 'Bank Account' }}
+                    </h1>
+                </div>
+            </div>
+
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+            <div class="row">
+                <div class="col-sm-12">
+                    {% if isManager %}
+                        {% if type == 'cc' %}
+                            <p>Enter the Credit Card you wish to keep stored in your Zoobdoo Manager account for future payments. Zoobdoo accepts visa, mastercard, discover and debits.
+                                Note: every time you add new card info, you will be charged a card verification fee of ${{ checkPaymentAmount }}.
+                            </p>
+                        {% else %}
+                            <p>Enter the Bank Account information you wish to keep stored in your Zoobdoo Manager account for future payments.
+                                Zoobdoo will use your bank account details only for the purpose of transferring to you rental payments from your tenants.
+                            </p>
+                        {% endif %}
+                    {% else %}
+                        {% if type == 'cc' %}
+                            <p>Enter the Credit Card you wish to keep stored in your Zoobdoo Tenant account for future payments. Zoobdoo accepts visa, mastercard, discover and debits.
+                                Note: if you have active recurring payment and you add new card info, you will be charged a card verification fee of ${{ checkPaymentAmount }}.
+                            </p>
+                        {% else %}
+                            <p>Enter the Bank Account information you wish to keep stored in your Zoobdoo Manager account for future payments.</p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% if errors %}
+                        <span class="field-validation-error">{{ errors }}</span>
+                    {% endif %}
+                    {% include 'ErpPaymentBundle:PaySimple/Forms:' ~ type ~'-form.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+{% endblock %}

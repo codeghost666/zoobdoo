@@ -1,0 +1,39 @@
+{% extends '::base.html.twig' %}
+
+{% set metaTitle = 'A Better Way to Manage Properties | Zoobdoo' %}
+{% set metaDescription = 'Zoobdoo is where proparty managers and tenants connect. Manage all of your properties, post vacant spaces, and receive rent payments online. Sign up today!' %}
+
+{% block pageContent %}
+
+    {% block homeSlider %}
+        {% if slider is defined %}
+            {% include 'ErpSiteBundle:Home/blocks:slider.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+    {% block homeServices %}
+        {% if content is defined and content|length %}
+            {% include 'ErpSiteBundle:Home/blocks:services.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+    {% block homeFeatures %}
+        {% if content is defined and content|length %}
+            {% include 'ErpSiteBundle:Home/blocks:features.html.twig' %}
+        {% endif %}
+    {% endblock %}
+
+    {% block homeModal %}
+        {% include 'ErpSiteBundle:Home/blocks:modal.html.twig' %}
+    {% endblock %}
+
+    {% block homeProperties %}
+        {% include 'ErpSiteBundle:Home/blocks:properties.html.twig' %}
+    {% endblock %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/main.js') }}"></script>
+{% endblock %}

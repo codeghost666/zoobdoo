@@ -1,0 +1,55 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+    {{ parent() }}
+
+    {% set title %}
+        {% if type == constant('Erp\\StripeBundle\\Entity\\Transaction::CASH_IN') %}
+            {{ date_from|date('F') }} Cash In
+        {% elseif type == constant('Erp\\StripeBundle\\Entity\\Transaction::CASH_OUT') %}
+            {{ date_from|date('F') }} Cash Out
+        {% else %}
+            Cashflows
+        {% endif %}
+    {% endset %}
+
+    <div class="page-content">
+        <section id="managers-listings" class="listings profile">
+            <div class="container">
+                <div class="row">
+                    <div class="title-block">
+                        <h1 class="bold-text">{{ title }}</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Type</td>
+                                <td>Amount</td>
+                                <td>Currency</td>
+                                <td>Created</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {#TODO currency, currency to format money#}
+                            {% for cashflow in pagination %}
+                                <tr>
+                                    <td>{{ cashflow.id }}</td>
+                                    <td>{{ cashflow.type }}</td>
+                                    <td>{{ cashflow.amount|stripe_money }}</td>
+                                    <td>{{ cashflow.currency }}</td>
+                                    <td>{{ cashflow.created|date('Y/m/d') }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

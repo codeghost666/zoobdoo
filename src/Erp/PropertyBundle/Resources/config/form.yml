@@ -1,0 +1,8 @@
+services:
+    erp_property.form.type.erp_property_scheduled_rent_payment:
+        class: Erp\PropertyBundle\Form\Type\ScheduledRentPaymentType
+        arguments:
+            - '@security.token_storage'
+            - '@erp_core.formatter.money_formatter'
+        tags:
+            - { name: form.type, alias: erp_property_scheduled_rent_payment }

@@ -1,0 +1,35 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+    {{ parent() }}
+    <div class="page-content">
+        <section id="managers-listings" class="listings profile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>Amount</td>
+                                <td>Created</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {#TODO currency, currency to format money#}
+                            {% for invoice in pagination %}
+                                <tr>
+                                    <td>{{ invoice.id }}</td>
+                                    <td>{{ invoice.amount|stripe_money }}</td>
+                                    <td>{{ invoice.created|date('Y/m/d') }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

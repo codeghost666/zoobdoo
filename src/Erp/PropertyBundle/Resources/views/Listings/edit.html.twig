@@ -1,0 +1,163 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/erpcore/js/fine-uploader/fine-uploader-new.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block paramsToJs %}
+    <input type="hidden" name="route__erp_core_get_cities_by_state_code" value="{{ path('erp_core_get_cities_by_state_code') }}"/>
+    <input type="hidden" id="image-count" value="{{ property.getId() ? property.getImages()|length : 1 }}"/>
+    <input type="hidden" id="document-count" value="{{ property.getId() ? property.getDocuments()|length : 1 }}"/>
+    <input type="hidden" id="image-block-prefix" value="{{ form.images.vars.id }}"/>
+    {% set carouselID = 'article-photo-carousel' %}
+    <input type="hidden" id="carousel-id" value="{{ carouselID }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpproperty/js/available-properties.controller.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/city.controller.js') }}"></script>
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+    <div class="page-content">
+        <section id="managers-listings-edit" class="listings profile">
+            <div class="container">
+                <div class="row">
+                    <div class="title-block">
+                        <h1 class="bold-text">Edit Property Details</h1>
+                    </div>
+                </div>
+
+                {% if property.id %}
+                    <div class="row text-center">
+                        <div class="col-xs-12 features property-tab">
+                            <a class="btn red-btn tab-btn active" href="{{ path('erp_property_listings_edit', {'propertyId': property.id}) }}">Property Details</a>
+                            <a class="btn red-btn tab-btn" href="{{ path('erp_property_property_settings_edit', {'propertyId': property.id}) }}">Edit Payment Settings</a>
+                            <a class="btn red-btn tab-btn" href="{{ path('erp_property_listings_edit_images', {'propertyId': property.id}) }}">Property Images</a>
+                            <a class="btn red-btn tab-btn" href="{{ path('erp_property_listings_edit_documents', {'propertyId': property.id}) }}">Property Documents</a>
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+                <div class="row">
+                    {{ form_start(form, { attr: {'id' : 'property-edit-form', 'class': 'form-horizontal', 'novalidate': 'novalidate'}, 'enctype': form_enctype(form)}) }}
+                        <div class="col-md-10 col-md-offset-1 listings-block">
+                            <div class="listing-block">
+                                {{ form_custom_errors.widget(form) }}
+                                <p>To set Property status to "Rented" please add Tenant to it on Listings page.</p>
+
+                                <div class="desc-block">
+                                    <div class="listing-form form-horizontal edit-prop-form">
+                                        <div class="prop-description form-group">
+                                            <div class="prop-info">
+                                                {{ form_label(form.name) }}
+                                                {{ form_widget(form.name) }}
+                                                {{ form_custom_errors.widget(form.name) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.stateCode) }}
+                                                <div class="prop-details dropdown">
+                                                    <div class="select-container">
+                                                        {{ form_widget(form.stateCode) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_custom_errors.widget(form.stateCode) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.city) }}
+                                                <div class="prop-details dropdown">
+                                                    <div class="select-container">
+                                                        {{ form_widget(form.city) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_custom_errors.widget(form.city) }}
+                                            </div>
+
+                                            <div class="prop-info">
+                                                {{ form_label(form.address) }}
+                                                {{ form_widget(form.address) }}
+                                                {{ form_custom_errors.widget(form.address) }}
+                                            </div>
+
+
+                                            <div class="prop-info">
+                                                {{ form_label(form.zip) }}
+                                                {{ form_widget(form.zip) }}
+                                                {{ form_custom_errors.widget(form.zip) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.settings.paymentAmount) }}
+                                                {{ form_widget(form.settings.paymentAmount) }}
+                                                {{ form_custom_errors.widget(form.settings.paymentAmount) }}
+                                            </div>
+
+                                            <div class="prop-info">
+                                                {{ form_label(form.ofBeds) }}
+                                                <div class="prop-details dropdown">
+                                                    <div class="select-container">
+                                                        {{ form_widget(form.ofBeds) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_custom_errors.widget(form.ofBeds) }}
+                                            </div>
+
+                                            <div class="prop-info">
+                                                {{ form_label(form.ofBaths) }}
+                                                <div class="prop-details dropdown">
+                                                    <div class="select-container">
+                                                        {{ form_widget(form.ofBaths) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_custom_errors.widget(form.ofBaths) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.status) }}
+                                                <div class="prop-details dropdown">
+                                                    <div class="select-container">
+                                                        {{ form_widget(form.status) }}
+                                                    </div>
+                                                </div>
+                                                {{ form_custom_errors.widget(form.status) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.squareFootage) }}
+                                                {{ form_widget(form.squareFootage) }}
+                                                {{ form_custom_errors.widget(form.squareFootage) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.amenities) }}
+                                                {{ form_widget(form.amenities) }}
+                                                {{ form_custom_errors.widget(form.amenities) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.aboutProperties) }}
+                                                {{ form_widget(form.aboutProperties) }}
+                                                {{ form_custom_errors.widget(form.aboutProperties) }}
+                                            </div>
+                                            <div class="prop-info">
+                                                {{ form_label(form.additionalDetails) }}
+                                                {{ form_widget(form.additionalDetails) }}
+                                                {{ form_custom_errors.widget(form.additionalDetails) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 submit-row">
+                            <a class="back-dashboard listings-back" href="{{ path('erp_property_listings_all', {'page': page}) }}">Back to Listings</a>
+                            {{ form_widget(form.submit) }}
+                        </div>
+                    <div class="hide"> {{ form_end(form) }}</div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

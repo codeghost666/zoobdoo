@@ -1,0 +1,69 @@
+{{ form_start(form, { attr: {'class': 'form-horizontal address-details-form', 'novalidate': 'novalidate'}, 'enctype': form_enctype(form)}) }}
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-6 address-details-textarea">
+                {{ form_label(form.addressOne) }}
+                {{ form_widget(form.addressOne) }}
+                {{ form_custom_errors.widget(form.addressOne) }}
+            </div>
+            <div class="col-xs-6 address-details-textarea">
+                {{ form_label(form.addressTwo) }}
+                {{ form_widget(form.addressTwo) }}
+                {{ form_custom_errors.widget(form.addressTwo) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-3" id="dropdown-wrap">
+                {{ form_label(form.state) }}
+                <div class="select-container dropdown">
+                    {{ form_widget(form.state) }}
+                </div>
+                {{ form_errors(form.state) }}
+            </div>
+            <div class="col-xs-6" id="dropdown-wrap">
+                {{ form_label(form.city) }}
+                <div class="select-container dropdown">
+                    {{ form_widget(form.city) }}
+                </div>
+                {{ form_custom_errors.widget(form.city) }}
+            </div>
+            <div class="col-xs-3 full-width">
+                {{ form_label(form.postalCode) }}
+                {{ form_widget(form.postalCode) }}
+                {{ form_custom_errors.widget(form.postalCode) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                {{ form_label(form.phone) }}
+                {{ form_widget(form.phone) }}
+                {{ form_custom_errors.widget(form.phone) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                {{ form_label(form.websiteUrl) }}
+                {{ form_widget(form.websiteUrl) }}
+                {{ form_custom_errors.widget(form.websiteUrl) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-footer">
+                <a class="back-dashboard" href="{{ path('erp_user_profile_dashboard') }}">Back to Dashboard</a>
+                {{ form_widget(form.save) }}
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,26 @@
+services:
+    erp_property.event_listener.property_entity_listener:
+        class: 'Erp\PropertyBundle\EventListener\PropertyEntityListener'
+        arguments:
+            - '@doctrine'
+        tags:
+            - { name: doctrine.orm.entity_listener, entity: 'Erp\PropertyBundle\Entity\Property', event: postPersist }
+            - { name: doctrine.orm.entity_listener, entity: 'Erp\PropertyBundle\Entity\Property', event: preUpdate }
+            - { name: doctrine.event_listener, event: postFlush }
+
+    erp_property.entity.unit_settings_manager:
+        class: Erp\PropertyBundle\Entity\UnitSettingsManager
+        arguments:
+            - '@doctrine'
+
+    erp_property.calculator.unit_price_calculator:
+        class: Erp\PropertyBundle\Calculator\UnitPriceCalculator
+        arguments:
+            - '@doctrine'
+
+    erp_property.validator.constraints.recurring_payment_class_validator:
+        class: Erp\PropertyBundle\Validator\Constraints\ScheduledRentPaymentClassValidator
+        arguments:
+            - '@security.token_storage'
+        tags:
+            - { name: validator.constraint_validator }

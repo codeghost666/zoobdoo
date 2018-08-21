@@ -1,0 +1,39 @@
+<div class="col-md-8 col-xs-12 profile-widget-item history-item">
+    <table border="1" cellpadding="7" width="100%" cellspacing="0">
+        <tr>
+            <td align="center" colspan="4" style="font-weight: bold; font-size: 36px; padding-bottom: 20px;">
+                Payment History
+            </td>
+        </tr>
+        <tr>
+            <th>Date:</th>
+            <th>Address:</th>
+            <th>Amount:</th>
+            <th>Notes:</th>
+        </tr>
+        {% if psHistories|length %}
+            {% for history in psHistories %}
+                <tr>
+                    <td>{{ history.getPaymentDate()|date('m/d/Y') }}</td>
+                    <td>{{ history.getProperty().getFullAddress() }}</td>
+                    <td>${{ history.getAmount() }}</td>
+                    <td>
+                        {% if history.getStatus() == constant('Erp\\PaymentBundle\\Entity\\PaySimpleHistory::STATUS_SUCCESS') %}
+                            Payment Success
+                        {% else %}
+                            Payment Error
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="4"><i>No results</i></td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td colspan="3">Total payments:</td>
+            <td>{{ psHistories|length }}</td>
+        </tr>
+    </table>
+</div>

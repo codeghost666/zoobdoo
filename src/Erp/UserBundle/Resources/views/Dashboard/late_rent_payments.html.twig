@@ -1,0 +1,66 @@
+<div class="col-md-12 col-xs-6 profile-widget-item widget-last">
+    <div class="row widget-title-row">
+        <div class="login-block-title bold-text">Late Rent Payments</div>
+    </div>
+    <div class="history-block">
+        <div class="payment-history">
+            <ul class="payment-table-title">
+                <li>
+                    <span class="col-xs-6 bold-text">Tenant</span>
+                    <span class="col-xs-3 bold-text amount-col">Owed</span>
+                    <span class="col-xs-2 bold-text amount-col">Days Late</span>
+                </li>
+            </ul>
+            <ul class="payment-table">
+                {# TODO Refactor preparing data #}
+                {% for property in properties_was_not_paid %}
+                    {% set action = path('erp_user_user_allow_rent_payment', {'user': property.tenantUser.id}) %}
+                    {% set popupUrl = path('erp_user_fee_create', {'user': property.tenantUser.id}) %}
+                    <li>
+                        <span class="col-xs-6">
+                            {{ property.tenantUser.fullName }}
+                            <a style="color: #ca171b;" role="popup" href="{{ path('erp_user_fee_remove_user', {'id': property.tenantUser.id}) }}">X</a>
+                            <br>
+                            <a style="color: #b7b7b7;text-decoration: underline;" href="{{ path('erp_user_fee_create', {'user': property.tenantUser.id}) }}" role="popup">Add Fee</a>
+                        </span>
+                        <span class="col-xs-3 amount-col">{{ property.tenantUser.totalOwedAmount|money }}</span>
+                        <span class="col-xs-2 amount-col">{{ property.tenantUser.rentPaymentBalance.dayLate }}</span>
+                        <div class="payment-table_note" style="position: relative">
+                            <span class="col-xs-6">
+                                {{ form_start(form, {'action': action}) }}
+                                <div>
+                                    {{ form_label(form.allowRentPayment) }}
+                                    <input type="checkbox" name="{{ form.allowRentPayment.vars.full_name }}" {% if property.tenantUser.allowRentPayment %}checked="checked"{% endif %}>
+                                </div>
+                                <div>
+                                    {{ form_label(form.allowPartialPayment) }}
+                                    <input type="checkbox" name="{{ form.allowPartialPayment.vars.full_name }}" {% if property.tenantUser.allowPartialPayment %}checked="checked"{% endif %}>
+                                </div>
+                                {{ form_end(form, {'render_rest': false}) }}
+                            </span>
+                            <a style="right: 5px; position: absolute; bottom: 5px" linked-element="#collapsed-{{ property.tenantUser.id }}">View</a>
+                        </div>
+                    </li>
+                    {% if fees %}
+                        <div id="collapsed-{{ property.tenantUser.id }}" style="display: none;">
+                        {% endif %}
+                        {% for fee in fees %}
+                            {% if fee.user.id == property.tenantUser.id %}
+                                <li>
+                                    <span class="col-xs-2 amount-col">{{ fee.createdAt|date('m/d/Y') }}</span>
+                                    <span class="col-xs-3 amount-col align-center">{{ fee.typeLabel }}</span>
+                                    <span class="col-xs-2 amount-col align-left">
+                                        {{ fee.amount|money }}
+                                        <a class="delete-btn red-btn-color" role="popup" href="{{ path('erp_user_fee_remove', {'id': fee.id}) }}">X</a>
+                                    </span>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if fees %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

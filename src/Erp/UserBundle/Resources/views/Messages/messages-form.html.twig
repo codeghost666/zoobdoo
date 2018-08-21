@@ -1,0 +1,31 @@
+{{ form_start(form, { attr: {'class': 'form-horizontal'}, 'enctype': form_enctype(form)}) }}
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                {{ form_label(form.subject) }}
+                {{ form_widget(form.subject) }}
+                {{ form_custom_errors.widget(form.subject) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                {{ form_label(form.text) }}
+                {{ form_widget(form.text) }}
+                {{ form_custom_errors.widget(form.text) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="form-footer">
+                    {{ form_widget(form.save) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{{ form_end(form) }}

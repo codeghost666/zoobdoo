@@ -1,0 +1,39 @@
+{% set entity = form.vars.value %}
+
+<div id="properties-confirmation" class="col-md-12">
+    Chosen Properties:
+    <form action="{{ path('erp_property_save_settings') }}">
+        <input type="hidden" name="data" value="{{ data|json_encode }}">
+        <ul>
+            {% for property in properties %}
+                <li>
+                    {{ property.id }} - {{ property.name }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="table_info">
+            Chosen Settings:
+            <div>Rent Payment acceptance date: {{ entity.dayUntilDue }}</div>
+            <div>Rent Payment Amount Allowed for Unit: {{ entity.paymentAmount }}</div>
+            <div>Restrict Partial Payments: {{ entity.allowPartialPayments ? 'Yes' : 'No' }}</div>
+            <div>Allow Credit Card Payments: {{ entity.allowCreditCardPayments ? 'Yes' : 'No' }}</div>
+            <div>Set auto-draft from tenant account: {{ entity.allowAutoDraft ? 'Yes': 'No' }}</div>
+        </div>
+
+        <button
+                class="btn edit-btn"
+                role="back"
+                step="properties-table"
+        >
+            Back
+        </button>
+        <button
+                type="submit"
+                class="btn edit-btn"
+                step="save-settings"
+        >
+            Submit
+        </button>
+    </form>
+</div>

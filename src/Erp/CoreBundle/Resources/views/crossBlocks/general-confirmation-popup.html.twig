@@ -1,0 +1,17 @@
+<div id="popup-content-block" class="promocode-delete-popup">
+    <h3>{{ askMsg|default('Are you sure?')|raw }}</h3>
+    <form novalidate="novalidate" action="{{ actionUrl|default('') }}" class="form-horizontal adm-form" method="POST">
+        <input type="hidden" name="_method" value="{{ actionMethod|default('POST') }}">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="button-wrap">
+                    {% if not hideActionBtn is defined %}
+						<button class="btn red-btn" type="submit">{{ actionBtn|default('Submit') }}</button>
+					{% endif %}
+                    <button type="button" class="btn red-btn" data-dismiss="modal">{{ cancelBtn|default('Cancel') }}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

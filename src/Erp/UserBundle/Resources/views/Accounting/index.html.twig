@@ -1,0 +1,28 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+    {{ parent() }}
+    <section id="managers-accounting" class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Accounting</h1>
+                </div>
+            </div>
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+            <div class="row profile-widget-row profile-widget-custom">
+
+                {% if (app.user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_MANAGER'))) %}
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <a class="btn red-btn" type="submit" href="{{ path('erp_user_landlords_create') }}" role="popup">Add landlord</a>
+                        <a class="btn red-btn" href="{{ path('erp_user_accounting_list_invoices') }}">Invoices</a>
+                    </div>
+                </div>
+                {% endif %}
+
+                {{ render(controller('ErpUserBundle:Accounting:showAccountingLedger')) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

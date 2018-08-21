@@ -1,0 +1,96 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://s3.amazonaws.com/cdn.hellosign.com/public/js/hellosign-embedded.LATEST.min.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/file-validator.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/documentation.controller.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/upload.js') }}"></script>
+{% endblock %}
+
+{% block paramsToJs %}
+    <input type="hidden" name="route__erp_user_document_update_ajax"
+           value="{{ path('erp_user_document_update_ajax', {'documentId':'documentId'}) }}"/>
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    {% if user.hasRole(role_manager) %}
+        <section id="documentation-page" class="profile documentation-section">
+    {% else %}
+        <section id="documentation-page" class="profile documentation-section tenant-documentation">
+    {% endif %}
+
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Documentation</h1>
+                </div>
+            </div>
+
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+
+            {% include "ErpUserBundle:Documentation:documentation-form.html.twig" %}
+            <div class="row messages-row">
+                <div class="col-md-3 companions-col default-companions-col">
+                    {{ knp_menu_render(menu, {'template': 'ErpUserBundle:Documentation/Menu:menu.html.twig'}) }}
+                </div>
+
+                <div class="col-xs-6 companions-col mobile-companions-col">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="true">
+                            Select {{ user.hasRole(role_manager) ? 'Tenant' : 'Manager' }}
+                            <span class="select-container"></span>
+                        </button>
+                        {{ knp_menu_render(menu, {'template': 'ErpUserBundle:Documentation/Menu:mobile-menu.html.twig'}) }}
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-xs-12 messages-col request-messages profile-widget-row">
+                    <h4 class="companion-messages-name">{{ currentCompanion.firstName|e }} {{ currentCompanion.lastName|e }}</h4>
+                    {% if user.hasRole(role_tenant) and (user.tenantProperty.contractForm and user.tenantProperty.contractForm.isPublished) %}
+                        <a href="{{ path('erp_property_contract_form_fill', {'propertyId':user.tenantProperty.id}) }}"
+                           class="red-link">Complete Online Rental Contract Form</a><br/><br/>
+                    {% endif %}
+                    {% if user_documents is not empty %}
+                        <div class="col-xs-12 doc-table profile-widget-item history-item">
+                            <div class="login-block-title doc-table-title bold-text">
+                                <ul class="payment-table-title">
+                                    <li>
+                                        <div class="col-xs-4 bold-text">File</div>
+                                        <div class="col-xs-2 bold-text">Date</div>
+                                        <div class="col-xs-3 bold-text amount-col">Status</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="history-block">
+                                <div class="payment-history">
+                                    <ul class="payment-table">
+                                        {% include "ErpUserBundle:Documentation:documentation-list.html.twig" %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        {% if not currentCompanion.hasRole(role_anonymous) %}
+                            <div>
+                                <p>
+                                    All changes made to files (add/delete/edit) will also be reflected for your
+                                    {{ user.hasRole(role_manager) ? 'Tenant' : 'Manager' }}
+                                </p>
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        <div class="no-documents">
+                            Documents have not been uploaded yet
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

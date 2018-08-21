@@ -1,0 +1,12 @@
+{% form_theme form 'ErpUserBundle:Form:form_horizontal.html.twig' %}
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+<div class="container-fluid">
+    <div class="row text-right">
+        <div class="row text-center">
+            <div class="col-md-12">
+                {{ form_start(form,{'method': 'POST','action': path('erp_vendor_create') }) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

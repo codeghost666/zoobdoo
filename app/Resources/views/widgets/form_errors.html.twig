@@ -1,0 +1,11 @@
+{% macro widget(form) %}
+    {% spaceless %}
+        {% if form.vars.errors|length %}
+            {% for error in form.vars.errors %}
+                <span class="field-validation-error">
+                    {{ error.message }}
+                </span>
+            {% endfor %}
+        {% endif %}
+    {% endspaceless %}
+{% endmacro %}

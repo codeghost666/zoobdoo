@@ -1,0 +1,28 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/file-validator.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/account-details.controller.js') }}"></script>
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <section id="register-form-tenants" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Account Login Details</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% include "ErpUserBundle:Profile:details-form.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

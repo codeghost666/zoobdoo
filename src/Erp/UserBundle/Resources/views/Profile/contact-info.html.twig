@@ -1,0 +1,31 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block paramsToJs %}
+    <input type="hidden" name="route__erp_core_get_cities_by_state_code" value="{{ path('erp_core_get_cities_by_state_code') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpuser/js/city.controller.js') }}"></script>
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <section id="register-form-tenants" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Contact Info</h1>
+                </div>
+            </div>
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% include "ErpUserBundle:Profile:contact-info-form.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

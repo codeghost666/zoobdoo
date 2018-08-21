@@ -1,0 +1,112 @@
+erp_property_listings_all:
+    path:     /all
+    defaults: { _controller: ErpPropertyBundle:Listing:index }
+    methods: [GET, POST]
+
+erp_property_listings_add:
+    path:     /add
+    defaults: { _controller: ErpPropertyBundle:Listing:edit, propertyId: null }
+    methods: [GET, POST]
+
+erp_property_listings_add_charge_popup:
+    path:     /add-charge
+    defaults: { _controller: ErpPropertyBundle:Listing:addCharge }
+    methods: [GET, POST]
+
+erp_property_listings_edit:
+    path:     /{propertyId}/edit
+    defaults: { _controller: ErpPropertyBundle:Listing:edit }
+    methods: [GET, POST]
+    requirements:
+        propertyId: \d+
+
+erp_property_listings_delete:
+    path:     /{propertyId}/delete
+    defaults: { _controller: ErpPropertyBundle:Listing:delete }
+    methods: [GET, DELETE]
+    requirements:
+        propertyId: \d+
+
+erp_property_listings_edit_documents:
+    path:     /{propertyId}/edit-documents
+    defaults: { _controller: ErpPropertyBundle:Listing:editDocuments }
+    methods: [GET, POST]
+    requirements:
+        propertyId: \d+
+
+erp_property_listings_edit_images:
+    path:     /{propertyId}/edit-images
+    defaults: { _controller: ErpPropertyBundle:Listing:editImages }
+    methods: [GET, POST]
+    requirements:
+        propertyId: \d+
+
+erp_property_upload_images:
+    path:     /upload
+    defaults: { _controller: ErpPropertyBundle:Listing:uploadImages }
+    methods: [GET, POST]
+
+erp_property_listings_delete_tenant:
+    path:     /{propertyId}/delete/tenant
+    defaults: { _controller: ErpPropertyBundle:Listing:deleteTenant }
+    methods: [GET, DELETE]
+    requirements:
+        propertyId : \d+
+
+erp_property_listings_delete_invited_tenant:
+    path:     /{propertyId}/delete/invited-tenant
+    defaults: { _controller: ErpPropertyBundle:Listing:deleteInvitedTenant }
+    methods: [GET, DELETE]
+    requirements:
+        propertyId : \d+
+
+erp_property_repost_request:
+    path:     /{propertyId}/repost-request
+    defaults: { _controller: ErpPropertyBundle:Listing:repostRequest }
+    methods: [GET, POST]
+    requirements:
+        propertyId : \d+
+
+erp_property_listings_import:
+    path:     /import
+    defaults: { _controller: ErpPropertyBundle:Listing:import }
+    methods: [GET, POST]
+
+erp_property_choose_settings:
+    path: /choose-settings
+    defaults: { _controller: ErpPropertyBundle:Listing:chooseSettings }
+    methods: [POST, GET]
+
+erp_property_choose_properties:
+    path: /choose-properties
+    defaults: { _controller: ErpPropertyBundle:Listing:chooseProperties }
+    methods: [POST, GET]
+
+erp_property_confirm_settings:
+    path: /confirm-settings
+    defaults: { _controller: ErpPropertyBundle:Listing:confirmSettings }
+    methods: [POST, GET]
+
+erp_property_save_settings:
+    path: /save-settings
+    defaults: { _controller: ErpPropertyBundle:Listing:saveSettings }
+    methods: [POST]
+
+erp_property_property_settings_edit:
+    path:     /{propertyId}/payment-settings/edit
+    defaults: { _controller: ErpPropertyBundle:Listing:editPaymentSettings }
+    options:
+        expose: true
+    methods: [GET, POST]
+
+erp_property_listing_search:
+    path:     /properties/search
+    defaults: { _controller: ErpPropertyBundle:Listing:search }
+    options:
+        expose: true
+    methods: [GET, POST]
+
+erp_property_listings_legal:
+    path:     /legalinfo
+    defaults: { _controller: ErpPropertyBundle:Listing:legalInfo }
+    methods: [GET]

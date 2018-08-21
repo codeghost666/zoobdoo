@@ -1,0 +1,25 @@
+<div class="col-md-5 col-xs-6 profile-widget-item widget-last">
+    <div class="row widget-title-row">
+        <div class="login-block-title bold-text">Cashflows</div>
+    </div>
+
+    <div class="row bank-info-row">
+        <div class="col-xs-12">
+            <canvas
+                id="cashflows-chart"
+                width="400" height="200"
+                data-cash-in="{{ cash_in|json_encode }}"
+                data-cash-out="{{ cash_out|json_encode }}"
+                data-labels="{{ labels|json_encode }}"
+                data-intervals="{{ intervals|json_encode }}"
+                data-listing-url="{{ url('erp_stripe_cashflow_index') }}"
+                >
+            </canvas>
+        </div>
+    </div>
+    <hr>
+
+    <div class="question-mark">
+
+    </div>
+</div>

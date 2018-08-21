@@ -1,0 +1,213 @@
+<div class="col-md-4 listings-block">
+    <div class="listing-block listing-section" id="images-edit">
+
+        {% include 'ErpPropertyBundle:Listings:slider-carousel.html.twig' with {'property' : property} %}
+
+        <div class="desc-block">
+            <div class="edit-block">
+                <div class="listings-edit">
+                    <span class="pencil"></span>
+                    <a href="{{ path('erp_property_listings_edit', {'propertyId' : property.getId(), 'page': page}) }}">Edit</a>
+                </div>
+                <span class="separate-image">|</span>
+
+                <div class="listings-edit">
+                    <span class="pencil"></span>
+                    <a href="{{ path('erp_property_listings_edit_images', {'propertyId':property.id, 'page':page}) }}">Images</a>
+                </div>
+            </div>
+            <div class="listing-form">
+                <div class="prop-description">
+                    <div class="prop-info">
+                        <span class="prop-label">Property</span>
+                        <span class="prop-details">
+                            {% if (property.status == constant('Erp\\PropertyBundle\\Entity\\Property::STATUS_AVAILABLE')) %}
+                                <a href="{{ path('erp_property_page', {'stateCode': property.city.stateCode, 'cityName': property.city.name, 'name': property.name}) }}"
+                                   target="_blank">{{ property.getName() }}</a>
+                            {% else %}
+                                {{ property.getName() }}
+                            {% endif %}
+                        </span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Address</span>
+                        <span class="prop-details">{{ property.getAddress() }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">City</span>
+                        <span class="prop-details">{{ property.getCity() ? property.getCity().getName() : '' }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">State</span>
+                        <span class="prop-details">{{ property.getStateCode() }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Zip</span>
+                        <span class="prop-details">{{ property.getZip() }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Price</span>
+                        <span class="prop-details prop-price">{{ property.settings ? property.settings.paymentAmount|money : '' }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label"># of Beds</span>
+                        <span class="prop-details">{{ get_value_of_bed(property.getOfBeds()) }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label"># of Baths</span>
+                        <span class="prop-details">{{ get_value_of_bath(property.getOfBaths()) }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Available/Rented</span>
+                        <span class="prop-details">{{ property.getStatus() }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Square Footage</span>
+                        <span class="prop-details">{{ property.getSquareFootage() }}+ sqFt</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Amenities</span>
+                        <span class="prop-details">{{ property.getAmenities() }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">About Property</span>
+                        <span class="prop-details">{{ property.getAboutProperties() }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Additional Details</span>
+                        <span class="prop-details">{{ property.getAdditionalDetails() }}</span>
+                    </div>
+                </div>
+
+                <div class="prop-description">
+                    <div class="tenant-title bold-text">
+                        Property Settings
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Rent Due Date</span>
+                        <span class="prop-details">{{ property.settings ? property.settings.dayUntilDue : '' }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Rent Amount</span>
+                        {# TODO Refacoring money #}
+                        <span class="prop-details">{{ property.settings ? property.settings.paymentAmount|money : '' }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Restrict Partial Payments</span>
+                        <span class="prop-details">{{ property.settings ? property.settings.allowPartialPayments ? 'Yes' : 'No' : '' }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Allow Credit Card Payments</span>
+                        <span class="prop-details">{{ property.settings ? property.settings.allowCreditCardPayments ? 'Yes' : 'No' : '' }}</span>
+                    </div>
+                    <div class="prop-info">
+                        <span class="prop-label">Set auto-draft from tenant?</span>
+                        <span class="prop-details">{{ property.settings ? property.settings.allowAutoDraft ? 'Yes' : 'No' : '' }}</span>
+                    </div>
+                </div>
+
+                {% include 'ErpPropertyBundle:Property:details-documents.html.twig' with {'forListings' : true} %}
+
+                <div class="tenant-info-block add-tenant-block prop-description">
+
+                    {% set tenant = property.getTenantUser() %}
+                    {% set invTenant = property.getInvitedUsers()|length ? property.getInvitedUsers()[0] : null %}
+                    <div class="tenant-title bold-text">
+                        Tenant
+                        {% if tenant %}
+                            <a class="delete-btn" role="popup"
+                               href="{{ path('erp_property_listings_delete_tenant', {'propertyId' : property.getId()}) }}">X</a>
+                        {% endif %}
+                        {% if invTenant %}
+                            <a class="delete-btn" role="popup"
+                               href="{{ path('erp_property_listings_delete_invited_tenant', {'propertyId' : property.getId()}) }}">X</a>
+                        {% endif %}
+                    </div>
+
+                    {% if tenant %}
+                        <div class="prop-info">
+                            <span class="prop-label">Name</span>
+                            <span class="prop-details">{{ tenant.getFirstName() }} {{ tenant.getLastName() }}</span>
+                        </div>
+                        <div class="prop-info">
+                            <span class="prop-label">Email</span>
+                            <span class="prop-details"><a class="tenant-email"
+                                                          href="mailto:{{ tenant.email }}">{{ tenant.email }}</a></span>
+                        </div>
+                        <div class="prop-info">
+                            <span class="prop-label">Tenant Status</span>
+                            <span class="prop-details">{{ tenant.isEnabled ? 'Active' : 'Deactivated' }}</span>
+                        </div>
+                    {% elseif invTenant %}
+                        <div class="prop-info">
+                            <span class="prop-label">Email</span>
+                            <span class="prop-details"><a class="tenant-email"
+                                                          href="mailto:{{ invTenant.invitedEmail }}">{{ invTenant.invitedEmail }}</a></span>
+                        </div>
+                        <div class="prop-info">
+                            <span class="prop-label">Tenant Status</span>
+                            <span class="prop-details">Pending</span>
+                        </div>
+                    {% else %}
+                        {{ render(controller('ErpPropertyBundle:Property:inviteTenant', {'propertyId' : property.getId() })) }}
+                    {% endif %}
+                </div>
+
+                {% set lastPropertyRepostRequest = property.propertyRepostRequests|last %}
+
+                <div class="tenant-info-block prop-description">
+                    <div class="tenant-title bold-text">
+                        Post Property to 3rd party listing providers
+                    </div>
+
+                    <div class="edit-row">
+                        {% if lastPropertyRepostRequest %}
+                        <div class="prop-status">
+                            <div class="prop-info">
+                                <span class="prop-label">Status</span>
+                                <span class="prop-details">
+                                    {% if lastPropertyRepostRequest.status == constant('Erp\\PropertyBundle\\Entity\\PropertyRepostRequest::STATUS_NEW') %}
+                                        In Progress
+                                    {% elseif lastPropertyRepostRequest.status == constant('Erp\\PropertyBundle\\Entity\\PropertyRepostRequest::STATUS_REJECTED') %}
+                                        Done (Rejected)
+                                    {% elseif lastPropertyRepostRequest.status == constant('Erp\\PropertyBundle\\Entity\\PropertyRepostRequest::STATUS_ACCEPTED') %}
+                                        Done (Posted)
+                                    {% endif %}
+                                </span>
+                            </div>
+                            {% if lastPropertyRepostRequest.note %}
+                                <div class="prop-info">
+                                    <span class="prop-label note-details-label">Note</span>
+                                    <span class="prop-details note-details">{{ lastPropertyRepostRequest.note }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+
+                        {% if user.isReadOnlyUser() %}
+                            <a class="btn edit-btn" type="submit" href="{{ path('erp_user_profile_read_only_popup') }}" role="popup">Submit</a>
+                        {% else %}
+                            {% if (lastPropertyRepostRequest and lastPropertyRepostRequest.status != constant('Erp\\PropertyBundle\\Entity\\PropertyRepostRequest::STATUS_NEW')) or not lastPropertyRepostRequest %}
+                                <form method="POST" action="{{ path('erp_property_repost_request', {'propertyId':property.id}) }}">
+                                    <button type="submit" class="btn edit-btn">Send Request</button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="tenant-info-block prop-description">
+                    <div class="tenant-title bold-text">
+                        Removing property
+                    </div>
+                    <div class="edit-row">
+                        <a href="{{ path('erp_property_listings_delete', {'propertyId' : property.id}) }}" role="popup"
+                           class="btn edit-btn">
+                            Remove
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpproperty/js/listings-edit.controller.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpproperty/js/properties-settings.controller.js') }}"></script>
+{% endblock %}
+
+{% block pageContent %}
+    {{ parent() }}
+    {% set page = pagination is defined ? pagination.currentPageNumber : 1 %}
+    <section id="managers-accounting" class="listings profile">
+        <div class="container">
+
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Contractor</h1>
+                </div>
+                <div class="form-group text-center">
+                    <a
+                            class="btn red-btn"
+                            type="submit"
+                            href="{{ path('erp_vendor_create') }}"
+                            role="popup"
+                    >Add Contractor</a>
+                </div>
+            </div>
+
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+            <div class="row">
+
+                {% if pagination|length %}
+                    {% for property in pagination %}
+                        {% if loop.first %}
+                            <div class="row">
+                        {% endif %}
+                        {% include 'ErpVendorBundle::vendor_list.html.twig' %}
+                        {% if loop.index % 3 == 0 %}
+                            </div><div class="row">
+                        {% endif %}
+                        {% if loop.last %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <p class="text-center">
+                        You have no Contractors yet.
+                    </p>
+                {% endif %}
+            </div>
+
+        </div>
+    </section>
+{% endblock %}
+

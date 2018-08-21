@@ -1,0 +1,76 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/upload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpproperty/js/contract.controller.js') }}"></script>
+    <script src='//cdn.tinymce.com/4/tinymce.min.js'></script>
+{% endblock %}
+
+{% block pageContent %}
+    {{ parent() }}
+
+    <div class="container">
+        <div class="form-group text-right">
+            <a href="{{ path('erp_property_listings_edit_documents', {'propertyId': property.id}) }}" class="btn edit-btn">Back</a>
+        </div>
+    </div>
+
+    <!-- Contract Form Constructor-->
+    <section id="rental-form-constructor" class="register-form rental-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Manage Online Rental Contract</h1>
+                    <h3 class="bold-text">Property: {{ property.name }}</h3>
+                </div>
+            </div>
+
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <b><u>How-To sign Rental Contract online:</u></b><br/>
+                                1) Manager creates and edits Online Rental Contract using Contract Builder<br/>
+                                2) Manager previews final contract as Tenant's web-form or as PDF file<br/>
+                                3) Manager enables contract by "Enable Online Contract for this Property" checkbox<br/>
+                                4) Link to complete Online Rental Contract appears in Tenant's Documentation area<br/>
+                                5) Tenant completes contract form, signs it online and downloads as PDF file<br/>
+                                6) Tenant uploads signed PDF contract to Manager's Documentation area<br/>
+                                7) Manager reviews the contract and signs it by clicking SIGN button<br/>
+                                8) Manager uploads signed PDF contract to Tenant's Documentation area<br/><br/>
+                                <b><u>Online Rental Contract Builder Help:</u></b><br/>
+                                <b>Warning:</b> this tool is not intended to operate properly on mobile devices, please use only desktop site version for smooth operation.<br/>
+                                <b>Markup:</b> To create an input element enter 2 or more underscores: ____ .To create a checkbox enter square brackets: [] .
+                                Use only black font and very simple tables. Read default contract carefully and replace or remove text formatted as italic, as it is locality specific.
+                                Do not paste text here from other rich editors or webpages to not brake formatting. It's better to type here text manually or copy it from notepad.
+                                Regularly preview your contract as online form and as PDF file to see how a result version will look like.<br/><br/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <input type="checkbox" id="isPublished" name="isPublished"
+                                       data-href="{{ path('erp_property_contract_form_publish', {'propertyId':property.id}) }}"
+                                       {% if contractForm.isPublished %}checked="checked"{% endif %}>
+                                <label for="isPublished">&nbsp;Enable Online Contract for this Property</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% if contractForm.contractSections %}
+                                {% for contractSection in contractForm.contractSections %}
+                                    {% include('ErpPropertyBundle:ContractForm/blocks:section.html.twig') %}
+                                {% endfor %}
+                            {% endif %}
+
+                            {% include('ErpPropertyBundle:ContractForm/blocks:add-section.html.twig') %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

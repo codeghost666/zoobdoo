@@ -1,0 +1,483 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="title" content="">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../web/assets/styles/style.min.css"/>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header-navbar header-navbar-white">
+    <div class="container container-nav">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar main-nav navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-col" aria-expanded="false">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="mobile-menu">
+                                <a href="" class="logo"></a>
+                                <ul class="mobile-btn">
+                                    <li class="home-btn"><a class="homepage-button-mobile login-button"
+                                                            href="">login</a></li>
+                                    <li class="home-btn"><a class="homepage-button-mobile signup-button"
+                                                            href="">signup</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="collapse navbar-collapse white-navbar" id="navbar-col">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="menu-home" class="active"><a href="">home</a></li>
+                                <li class="current"><a href="">about</a></li>
+                                <li class=""><a href="">features</a></li>
+                                <li><a href="">faq</a></li>
+                                <li class="contact"><a href="">contact</a></li>
+                                <li class="home-btn"><a class="homepage-button login-button" href="">login</a></li>
+                                <li class="home-btn"><a class="homepage-button signup-button" href="">signup</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Header Banner -->
+<section id="header-banner" class="header-banner"
+         style="background: url(../web/assets/images/page-banner.png) no-repeat;">
+    <div class="header-overlay"></div>
+    <div class="header-block">
+        <div class="centerize-header-block">
+            <span>Tenants</span>
+        </div>
+    </div>
+</section>
+
+<!-- Tenants Profile-->
+<div class="page-content">
+
+    <section class="secondary-profile-menu">
+        <div class="container">
+            <div class="row">
+                <nav class="navbar secondary-profile-nav navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#secondary-profile-navbar" aria-expanded="false">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <span class="page-title navbar-toggle collapsed" data-toggle="collapse"
+                                  data-target="#secondary-profile-navbar" aria-expanded="false">Profile</span>
+                        </div>
+                        <div class="collapse navbar-collapse white-navbar" id="secondary-profile-navbar">
+                            <ul class="nav navbar-nav tenant-nav">
+                                <li class="menu-item current"><a href="">Profile</a><span
+                                        class="secondary-menu-icon profile-icon"></span></li>
+                                <li class="menu-item"><a href="">Contact Info</a><span
+                                        class="secondary-menu-icon contact-icon"></span></li>
+                                <li class="menu-item"><a href="">Renter Documentation</a><span
+                                        class="secondary-menu-icon documentation-icon"></span></li>
+                                <li class="menu-item"><a href="">Messages</a><span
+                                        class="secondary-menu-icon messages-icon"></span>
+                                    <div class="messages-count-icon"><span class="messages-count">5</span></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <section id="tenants-profile" class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Your Profile</h1>
+                </div>
+            </div>
+
+            <div class="row profile-widget-row">
+                <div class="col-md-3 col-xs-6 profile-widget-item widget-first">
+                    <div class="row widget-title-row">
+                        <div class="login-block-title bold-text">Pay Rent</div>
+                    </div>
+                        <form class="pay-widget">
+                            <div class="form-group col-xs-7">
+                                <input type="text" name="subject" class="form-control subject" placeholder="Amount $">
+                            </div>
+                            <div class="form-group col-md-5 method-col">
+                                <label class="control-label"><span>Paying method:</span><span class="method-name">Bank Transfer</span></label>
+                            </div>
+                            <div class="form-group col-md-12 date-col">
+                                <input type="text" name="subject" class="form-control subject date" placeholder="Payment Date">
+                            </div>
+                            <div class="form-footer col-md-12">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox"><span>Make this a recurring payment</span>
+                                    </label>
+                                </div>
+                                <div class="row edit-row">
+                                    <button type="submit" class="btn red-btn">Make Payment</button>
+                                </div>
+                            </div>
+                        </form>
+                    <hr>
+                    <div class="question-mark"><a href="" data-toggle="modal"
+                                                  data-target="#helpModal">&#063;</a></div>
+                </div>
+
+                <div class="col-md-5 col-xs-6 profile-widget-item widget-last">
+                    <div class="row widget-title-row">
+                        <div class="login-block-title bold-text">Bank &amp; Cards Information</div>
+                    </div>
+                    <div class="row bank-info-row">
+                        <div class="col-xs-6">
+                            <div class="bank-details">
+                                <div class="bank-title"><span class="bank-icon"></span><span>Citizens Bank</span></div>
+                                <div class="bank-card"><span class="bank-card-icon"></span><span>87876867</span></div>
+                                <div class="primary-account">Primary, Account</div>
+                            </div>
+                            <div class="row edit-row">
+                                <button type="submit" class="btn edit-btn">edit</button>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="bank-details">
+                                <div class="bank-title"><span class="bank-icon"></span><span>TDBank</span></div>
+                                <div class="bank-card"><span class="bank-card-icon"></span><span>5656</span></div>
+                            </div>
+                            <div class="row edit-row">
+                                <button type="submit" class="btn edit-btn">edit</button>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="question-mark"><a href="" data-toggle="modal"
+                                                  data-target="#helpModal">&#063;</a></div>
+                </div>
+
+                <div class="col-md-3 col-xs-6 profile-widget-item widget-first">
+                    <div class="row widget-title-row">
+                        <div class="login-block-title bold-text">Payment Preferences</div>
+                    </div>
+                    <div class="payment-type">
+                        <h4>How would you like to pay?</h4>
+                        <a href="" class="active">Credit Card</a> &nbsp; | &nbsp;
+                        <a href="">Bank</a>
+                    </div>
+                    <hr>
+                    <div class="question-mark"><a href="" data-toggle="modal"
+                                                  data-target="#helpModal">&#063;</a></div>
+                </div>
+
+            </div>
+
+            <div class="row profile-widget-row profile-widget-rows">
+                <div class="col-md-3 col-xs-6 profile-widget-item widget-last">
+
+                    <div class="profile-widget-content">
+                        <div class="row widget-title-row">
+                            <div class="login-block-title bold-text">Message Landlord</div>
+                        </div>
+                            <form class="message-landlord">
+                                <div class="form-group">
+                                    <input type="text" name="subject" class="form-control subject" placeholder="Subject">
+                                </div>
+                                <div class="form-group">
+                                        <textarea rows="2" id="_message" name="message" class="full-width form-control"
+                                                  placeholder="Message"></textarea>
+                                </div>
+                                <div class="form-footer">
+                                    <div class="row edit-row">
+                                        <button type="submit" class="btn red-btn">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        <hr>
+                        <div class="question-mark"><a href="" data-toggle="modal"
+                                                      data-target="#helpModal">&#063;</a></div>
+                    </div>
+
+                    <div class="profile-widget-content widget-second">
+                        <div class="row widget-title-row">
+                            <div class="login-block-title bold-text">Email Options</div>
+                        </div>
+                        <div class="email-block">
+                            <div class="email-row">
+                                <span class="fa fa-envelope-o"></span><span class="email-details">tsmith@gmail.com</span>
+
+                                <div class="primary-email">Primary, Email</div>
+                            </div>
+                            <div class="email-row">
+                                <span class="fa fa-envelope-o"></span>
+                                <span class="email-details">smithrd@yahoo.com</span>
+                            </div>
+                        </div>
+                        <div class="row edit-row">
+                            <button type="submit" class="btn edit-btn">edit</button>
+                        </div>
+                        <hr>
+                        <div class="question-mark"><a href="" data-toggle="modal"
+                                                      data-target="#helpModal">&#063;</a></div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-5 col-xs-12 profile-widget-item widget-first request-item">
+                    <div class="row widget-title-row">
+                        <div class="login-block-title bold-text">Request Service</div>
+                    </div>
+                        <form class="request-form">
+                            <div class="form-group col-md-6">
+                                <input type="text" name="username" class="form-control" placeholder="Username">
+                            </div>
+                             <div class="form-group col-md-6">
+                                <input type="text" name="date" class="form-control date" placeholder="Date">
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <div class="dropdown">
+                                    <div class="select-container">
+                                        <select class="form-control select-control">
+                                            <option>Service Requested</option>
+                                            <option>Service Requested2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-12">
+                                    <textarea rows="12" id="_message" name="message" class="full-width form-control"
+                                              placeholder="Message"></textarea>
+                            </div>
+                            <div class="form-footer col-md-12">
+                                <button type="submit" class="btn btn-primary red-btn">Submit</button>
+                            </div>
+                        </form>
+                    <hr>
+                    <div class="question-mark"><a href="" data-toggle="modal"
+                                                  data-target="#helpModal">&#063;</a></div>
+                </div>
+
+
+                <div class="col-md-3 col-xs-6 profile-widget-item login-widget widget-last">
+
+                <div class="profile-widget-content">
+                    <div class="row widget-title-row">
+                        <div class="login-block-title bold-text">Account Login Details</div>
+                    </div>
+                    <div class="row login-row">
+                        <div class="account-photo"><img src="../web/assets/images/homepage/shutterstock.png"></div>
+                        <div class="account-info-block">
+                            <div class="account-info"><span class="account-icon icon-user"></span><span>Mr.Smith</span>
+                            </div>
+                            <div class="account-info"><span class="account-icon icon-lock"></span><span>****</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row edit-row">
+                        <button type="submit" class="btn edit-btn">edit</button>
+                    </div>
+                    <hr>
+                    <div class="question-mark"><a href="" data-toggle="modal"
+                                                  data-target="#helpModal">&#063;</a></div>
+                </div>
+
+                    <div class="profile-widget-content widget-second prop-widget">
+                        <div class="row widget-title-row">
+                            <div class="login-block-title bold-text">My Property</div>
+                        </div>
+                        <div class="address-details-block">
+                            <div class="primary-address">Your Address:</div>
+                            <span class="address-details street-details">123 Main Street</span>
+                            <span class="address-details city-details">City, State 08094</span>
+                        </div>
+                        <hr>
+                        <div class="question-mark"><a href="" data-toggle="modal"
+                                                      data-target="#helpModal">&#063;</a></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="my-modal-label"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="my-modal-label">Hi!</h4>
+                </div>
+                <div class="modal-body">
+                    Hello :)
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container default-footer">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h2>Company</h2>
+                <ul>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">How It Works</a></li>
+                    <li><a href="">Social Media</a></li>
+                    <li><a href="">FAQ</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Features</h2>
+                <ul>
+                    <li><a href="">Landlords</a></li>
+                    <li><a href="">Tenants</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Landlords</h2>
+                <ul>
+                    <li><a href="">Login</a></li>
+                    <li><a href="">Sign Up</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Tenants</h2>
+                <ul>
+                    <li><a href="">Refer a Landlord</a></li>
+                    <li><a href="">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mobile-footer">
+        <div class="row">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Company<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">About Us</a></li>
+                                <li><a href="">How It Works</a></li>
+                                <li><a href="">Social Media</a></li>
+                                <li><a href="">FAQ</a></li>
+                                <li><a href="">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Features<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">Landlords</a></li>
+                                <li><a href="">Tenants</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Landlords<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">Login</a></li>
+                                <li><a href="">Sign Up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Tenants<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">Refer a Landlord</a></li>
+                                <li><a href="">Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="copyright-dark">
+        <div class="container">
+            <span class="copyright">&copy; Copyright <?php echo date('Y'); ?> eRentPay</span>
+            <ul class="copyright-links">
+                <li><a href="">Terms of Service</a>&nbsp; | &nbsp;</li>
+                <li><a href="">Privacy Policy</a>&nbsp; | &nbsp;</li>
+                <li><a href="">Site</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Scripts -->
+<script type="text/javascript" src="../web/assets//scripts/main.min.js"></script>
+<!-- нужен для страниц c формами -->
+<script src="../src/Erp/CoreBundle/Resources/public/js/select2.min.js"></script>
+<!-- нужен для страниц профайла -->
+<script src="../src/Erp/CoreBundle/Resources/public/js/bootstrap-datepicker.min.js"></script>
+<script src="../web/bundles/erpproperty/js/available-properties.controller.js"></script>
+<script src="../src/Erp/CoreBundle/Resources/public/js/profile.js"></script>
+
+</body>
+</html>

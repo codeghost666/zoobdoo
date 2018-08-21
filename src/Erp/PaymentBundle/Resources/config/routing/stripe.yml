@@ -1,0 +1,24 @@
+erp_payment_ps_change_primary_type:
+    path:     /account/change-primary-type
+    defaults: { _controller: ErpPaymentBundle:PaySimple:changePaymentPrimaryType }
+    methods: [GET]
+
+erp_payment_ps_history:
+    path:     /history
+    defaults: { _controller: ErpPaymentBundle:PaymentWidgets:paymentHistory}
+    methods: [GET, POST]
+
+erp_payment_stripe_save_credit_card:
+    path: /account/create/cc
+    defaults: { _controller: ErpPaymentBundle:Stripe:saveCreditCard }
+    methods: [GET, POST]
+
+erp_payment_stripe_verify_bank_account:
+    path: /account/create/ba
+    defaults: { _controller: ErpPaymentBundle:Stripe:verifyBankAccount }
+    methods: [POST]
+
+erp_payment_stripe_verify_account:
+    path:     /account/ba/verify
+    defaults: { _controller: ErpPaymentBundle:Stripe:verifyAccount }
+    methods: [POST]

@@ -1,0 +1,58 @@
+
+
+<div class="col-md-12 col-xs-6 profile-widget-item widget-last">
+    <div class="row widget-title-row">
+        <div class="login-block-title bold-text">Work Orders</div>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th class="col-xs-4 col-md-4 text-left">Description</th>
+            <th class="col-xs-1 col-md-1 text-center">Status</th>
+            <th class="col-xs-2 col-md-2 text-center">Contractor</th>
+            <th class="col-xs-2 col-md-2 text-center">Reported Date</th>
+            <th class="col-xs-2 col-md-2 text-center">Service time</th>
+            <!--<th class="col-xs-2 col-md-2 text-center">Sub Total</th>
+            <th class="col-xs-2 col-md-2 text-center">Total</th>-->
+        </tr>
+        </thead>
+        <tbody>
+
+        {% if (pagination|length) %}
+            {% for item in pagination %}
+                <tr>
+                    <td class="text-left">{{ item.description }}</td>
+                    {% if (item.status == 0) %}
+                    <td class="text-center" style="background-color: #d9534f; color: #ffffff">
+                    {% elseif (item.status == 1) %}
+                        <td class="text-center" style="background-color: #286090; color: #ffffff">
+                    {% else %}
+                        <td class="text-center" style="background-color: #449d44; color: #ffffff">
+                        {% endif %}
+                        {{ status[item.status] }}
+                    </td>
+                    <td class="text-left">
+                        {% if (contractor|length) %}
+                            {% if (item.contractor in contractor|keys) %}
+                                {{ contractor[item.contractor] }}
+                            {% else %}
+                                ---
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                    <td class="text-center" nowrap>{{ item.createdDate|date('M d, Y') }}</td>
+                    <td class="text-center">{{ item.serviceDate|date('M d, Y') }} {{ item.serviceTime }}</td>
+
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="7" class="text-center">No matches.</td>
+            </tr>
+        {% endif %}
+
+        </tbody>
+    </table>
+
+</div>

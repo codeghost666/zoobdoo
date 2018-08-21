@@ -1,0 +1,29 @@
+{{ form_start(form, { attr: {'class': 'form-horizontal', 'novalidate': 'novalidate'}, 'enctype': form_enctype(form)}) }}
+
+<div class="row">
+    <div class="form-group terms-group">
+        <div class="col-xs-12 terms-text displayed">
+            <h2>Terms of Use</h2>
+            {{ termsOfUse|raw }}
+        </div>
+        <div class="col-xs-12">
+            <div class="checkbox">
+                {{ form_widget(form.isTermOfUse) }}
+                <label class="control-label">I have read and agree to <a href="#" class="terms-link red-link">Zoobdoo Terms of Use</a> provided on this page.</label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="form-footer">
+                {{ form_widget(form.save) }}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="hide">
+    {{ form_end(form) }}
+</div>

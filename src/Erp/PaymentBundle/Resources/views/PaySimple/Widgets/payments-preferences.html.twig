@@ -1,0 +1,40 @@
+{% set cc = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::CREDIT_CARD') %}
+{% set ba = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::BANK_ACCOUNT') %}
+
+<div class="profile-widget-item">
+    <div class="widget-title-row">
+        <div class="login-block-title bold-text">Payment Preferences</div>
+    </div>
+    <div class="payment-type">
+        <h4>How would you like to pay?</h4>
+        {% if psCustomer %}
+            {% if (psCustomer.getPrimaryType() == cc) %}
+                <span class="active">Credit Card</span>&nbsp; | &nbsp;
+                {% if psCustomer.getBaId() %}
+                    <a href="{{ path('erp_payment_ps_change_primary_type') }}">Bank</a>
+                {% else %}
+                    <span class="non-active">Bank</span>
+                {% endif %}
+                {% if isTenant %}
+                    <br/><br/><span class="small non-active">By using CC you agree for additional {{ ccTransactionFeePercent }}% fee</span>
+                {% endif %}
+            {% else %}
+                {% if psCustomer.getCcId() %}
+                    <a href="{{ path('erp_payment_ps_change_primary_type') }}">Credit Card</a>&nbsp; | &nbsp;
+                {% else %}
+                    <span class="non-active">Credit Card</span>&nbsp; | &nbsp;
+                {% endif %}
+                <span class="active">Bank</span>
+                {% if psCustomer.psRecurringPayments|length %}
+                    <br/><br/><span class="small non-active">Switching to CC will charge the card verification fee: ${{ checkPaymentAmount }}</span>
+                {% endif %}
+            {% endif %}
+        {% else %}
+            <span>Credit Card</span>&nbsp; | &nbsp; <span>Bank</span>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="question-mark">
+        <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'payment_preferences'}) }}">&#063;</a>
+    </div>
+</div>

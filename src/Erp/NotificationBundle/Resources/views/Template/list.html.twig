@@ -1,0 +1,47 @@
+{% extends 'ErpNotificationBundle::base.html.twig' %}
+
+{% block pageSubContent %}
+    {{ parent() }}
+    <section id="managers-profile" class="profile">
+        <div class="container">
+            {% include "ErpNotificationBundle:Template:actions.html.twig" %}
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+            {% if templates is not empty %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-lg-7 col-md-7 col-sm-7 col-xs-7">Title</th>
+                            <th class="col-lg-3 col-md-3 col-sm-3 col-xs-3">Type</th>
+                            <th class="col-lg-2 col-md-2 col-sm-2 col-xs-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for template in templates %}
+                        <tr>
+                            <td>{{ template.title }}</td>
+                            <td>{{ template.type }}</td>
+                            <td>
+                                <a
+                                    class="btn red-btn"
+                                    href="{{ path('erp_notification_template_update', {'id': template.id}) }}"
+                                >
+                                    Edit
+                                </a>
+                                <a
+                                    class="btn red-btn"
+                                    href="{{ path('erp_notification_template_print_pdf', {'id': template.id}) }}"
+                                    target="_blank"
+                                >
+                                    Get PDF
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                There are no templates.
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

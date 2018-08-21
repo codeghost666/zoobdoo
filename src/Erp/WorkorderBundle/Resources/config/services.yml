@@ -1,0 +1,4 @@
+services:
+#    erp_workorder.example:
+#        class: Erp\WorkorderBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

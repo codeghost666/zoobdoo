@@ -1,0 +1,21 @@
+erp_payment_ps_create_account:
+    path:     /account/create/{type}
+    defaults: { _controller: ErpPaymentBundle:PaySimple:createPaymentAccount }
+    methods: [GET,POST]
+    requirements:
+        type: cc|ba
+
+erp_payment_ps_change_primary_type:
+    path:     /account/change-primary-type
+    defaults: { _controller: ErpPaymentBundle:PaySimple:changePaymentPrimaryType }
+    methods: [GET]
+
+erp_payment_ps_pay_rent:
+    path:     /pay-rent
+    defaults: { _controller: ErpPaymentBundle:PaymentWidgets:payRent }
+    methods: [POST]
+
+erp_payment_ps_history:
+    path:     /history
+    defaults: { _controller: ErpPaymentBundle:PaymentWidgets:paymentHistory}
+    methods: [GET, POST]

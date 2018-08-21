@@ -1,0 +1,148 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block headerBannerTitle %}
+    Manager
+{% endblock %}
+
+{% block javascript_inline %}
+    <script type="text/javascript">
+        (function ($) {
+            var $modal = $('#modal-invoice');
+
+            $('a[data-toggle="modal"]').on('click', function (event) {
+                event.preventDefault();
+                $.ajax({
+                    type: 'GET',
+                    cache: false,
+                    url: this.href || this.getAttribute('href'),
+                    dataType: 'json',
+                    async: true,
+                    success: function (response) {
+                        $modal.find('.modal-content').html(response.html);
+                        $modal.modal('show');
+                        return false;
+                    }
+                });
+            });
+
+            $modal.on('hide.bs.modal', function () {
+                var $this = $(this);
+                $this.removeData('bs.modal');
+                $this.find('.modal-content').html('');
+                return true;
+            });
+        })(jQuery);
+    </script>
+{% endblock %}
+
+{% block pageContent %}
+    {{ parent() }}
+    <div class="page-content">
+        <section id="managers-listings" class="listings profile">
+            <div class="container">
+                {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form_start(form) }}
+                        <div class="form-group form-accounting">
+                            <div class="col-xs-12 col-md-2">
+                                {{ form_label(form.dateFrom) }}
+                                {{ form_widget(form.dateFrom, {'attr': {'class': 'form-control date'}}) }}
+                            </div>
+                            <div class="col-xs-12 col-md-2">
+                                {{ form_label(form.dateTo) }}
+                                {{ form_widget(form.dateTo, {'attr': {'class': 'form-control date'}}) }}
+                            </div>
+                            <div class="col-xs-12 col-md-1">
+                                <label for="filter">&nbsp;</label><br/>
+                                <button id="filter" name="filter" class="btn red-btn" type="submit">Find</button>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="col-xs-2 col-md-2">Date Created</th>
+                                    <th class="col-xs-2 col-md-2">Sent To</th>
+                                    <th class="col-xs-2 col-md-2">Description</th>
+                                    <th class="col-xs-2 col-md-2">Amount</th>
+                                    <th class="col-xs-2 col-md-2">Status</th>
+                                    <th class="col-xs-2 col-md-2">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if (pagination|length) %}
+                                    {% for item in pagination %}
+                                        <tr>
+                                            <td class="text-left">
+                                                {{ item.getCreatedAt()|date('M d, Y') }}<br/>
+                                                {{ item.getCreatedAt()|date('h:i:s') }}
+                                            </td>
+                                            <td class="text-left">
+                                                {{ item.getReceiver().getEmail() }}
+                                            </td>
+                                            <td class="text-left">
+                                                {% if (item.description) %}
+                                                    <em>{{ item.getDescription() }}</em>
+                                                {% endif %}
+                                            </td>
+                                            <td class="text-left">
+                                                {{ item.getAmount()|stripe_money(false) }}
+                                            </td>
+                                            <td class="text-left">
+                                                <span class="invoice-status">{{ item.getStatus()|capitalize }}</span>
+                                            </td>
+                                            <td>
+                                                <a class="details-btn det-btn" href="{{ path('erp_user_accounting_show_invoice', {'invoiceId': item.getId(), '_format': 'html'}) }}" data-toggle="modal" data-target="#modal-invoice">
+                                                    Details
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="6" class="text-center">No matches.</td>
+                                    </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+
+                        {{ knp_pagination_render(pagination) }}
+
+                        {% if (pagination|length) %}
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="form-group">
+                                        <button role="button" class="btn red-btn" onclick="javascript:location.href = '{{ pdf_link }}'">
+                                            Export as PDF
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-right">
+                            <a class="btn red-btn" type="submit" href="{{ path('erp_user_landlords') }}" role="popup">Send new</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <div class="modal fade" id="modal-invoice" tabindex="-1" role="dialog" aria-labelledy="modal-invoice">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content"></div>
+        </div>
+    </div>
+{% endblock %}

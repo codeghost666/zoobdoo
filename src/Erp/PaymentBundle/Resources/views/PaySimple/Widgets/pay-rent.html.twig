@@ -1,0 +1,47 @@
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+
+{% set cc = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::CREDIT_CARD') %}
+{% set ba = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::BANK_ACCOUNT') %}
+
+<div class="col-md-3 col-xs-6 profile-widget-item widget-first tenants-pay">
+    <div class="row widget-title-row">
+        <div class="login-block-title bold-text">Pay Rent</div>
+    </div>
+    {{ form_start(form, { attr: {'class': 'pay-widget'}, 'enctype': form_enctype(form)}) }}
+	<input type="hidden" id="property-price" value="{{ tenantProperty.settings.getPaymentAmount() }}"/>
+        <div class="form-group col-xs-7">
+            {{ form_widget(form.amount) }}
+        </div>
+        <div class="form-group col-xs-5 method-col">
+            <label class="control-label">
+                <span>Payment method:</span>
+                <span class="method-name">
+                    {% if (psCustomer) %}
+                        {{ psCustomer.getPrimaryType() == cc ? 'Credit Card' : 'Bank Transfer' }}
+                    {% else %}
+                        Bank Transfer
+                    {% endif %}
+                </span>
+            </label>
+        </div>
+
+        <div class="form-group col-xs-12 date-col">
+            {{ form_widget(form.startDate) }}
+        </div>
+        <div class="form-footer col-xs-12">
+            <div class="checkbox">
+                <label>
+                    {{ form_widget(form.isRecurring) }}
+                    {{ form_label(form.isRecurring) }}
+                </label>
+            </div>
+            <div class="row edit-row">
+                {{ form_widget(form.submit) }}
+            </div>
+        </div>
+    {{ form_end(form) }}
+    <hr>
+    <div class="question-mark">
+        <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'pay_rent'}) }}">&#063;</a>
+    </div>
+</div>

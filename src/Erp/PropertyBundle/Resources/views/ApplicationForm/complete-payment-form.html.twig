@@ -1,0 +1,116 @@
+<div class="form-group">
+    <div class="col-xs-4">
+        {{ form_label(psCcAnonymousForm.email) }}
+        {% if psData.email is defined %}
+            {% set value = psData.email %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.email, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.email) }}
+    </div>
+    <div class="col-xs-4">
+        {{ form_label(psCcAnonymousForm.firstName) }}
+        {% if psData.firstName is defined %}
+            {% set value = psData.firstName %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.firstName, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.firstName) }}
+    </div>
+    <div class="col-xs-4">
+        {{ form_label(psCcAnonymousForm.lastName) }}
+        {% if psData.lastName is defined %}
+            {% set value = psData.lastName %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.lastName, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.lastName) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-xs-3">
+        {{ form_label(psCcAnonymousForm.phone) }}
+        {% if psData.phone is defined %}
+            {% set value = psData.phone %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.phone, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.phone) }}
+    </div>
+    <div class="col-xs-9">
+        {{ form_label(psCcAnonymousForm.address) }}
+        {% if psData.address is defined %}
+            {% set value = psData.address %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.address, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.address) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-xs-4">
+        {{ form_label(psCcAnonymousForm.city) }}
+        {% if psData.city is defined %}
+            {% set value = psData.city %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.city, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.city) }}
+    </div>
+    <div class="col-xs-4">
+        {{ form_label(psCcAnonymousForm.stateCode) }}
+        {% if psData.stateCode is defined %}
+            {% set value = psData.stateCode %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.stateCode, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.stateCode) }}
+    </div>
+    <div class="col-xs-4">
+        {{ form_label(psCcAnonymousForm.zipCode) }}
+        {% if psData.zipCode is defined %}
+            {% set value = psData.zipCode %}
+        {% else %}
+            {% set value = '' %}
+        {% endif %}
+        {{ form_widget(psCcAnonymousForm.zipCode, {'value':value}) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.zipCode) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-xs-3">
+        {{ form_label(psCcAnonymousForm.issuer) }}
+        <div class="select-container">
+            {{ form_widget(psCcAnonymousForm.issuer) }}
+        </div>
+        {{ form_custom_errors.widget(psCcAnonymousForm.issuer) }}
+    </div>
+    <div class="col-xs-9">
+        {{ form_label(psCcAnonymousForm.number) }}
+        {{ form_widget(psCcAnonymousForm.number) }}
+        {{ form_custom_errors.widget(psCcAnonymousForm.number) }}
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-xs-3">
+        {{ form_label(psCcAnonymousForm.expMonths) }}
+        <div class="select-container">
+            {{ form_widget(psCcAnonymousForm.expMonths) }}
+        </div>
+        {{ form_custom_errors.widget(psCcAnonymousForm.expMonths) }}
+    </div>
+    <div class="col-xs-3">
+        {{ form_label(psCcAnonymousForm.expYear) }}
+        <div class="select-container">
+            {{ form_widget(psCcAnonymousForm.expYear) }}
+        </div>
+        {{ form_custom_errors.widget(psCcAnonymousForm.expYear) }}
+    </div>
+</div>

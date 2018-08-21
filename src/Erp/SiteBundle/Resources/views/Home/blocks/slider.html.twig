@@ -1,0 +1,38 @@
+<section class="slider carousel slide homepage-slider" id="slider-main" data-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+        {% for key, slide in slider %}
+            <div class="item{% if not key %} active{% endif %}">
+                <div class="slide-inner slide1" style="background: url({{ asset(slide.image.path ~ '/' ~ slide.image.name) }}) no-repeat;">
+                    <div class="slider-text">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <div class="slide-content">
+                                        <h1>{{ slide.title|raw }}</h1>
+                                        <div class="slide-text">{{ slide.text|raw }}</div>
+                                        {% if is_granted("ROLE_ADMIN") %}
+                                            <a href="{{ path('sonata_admin_dashboard') }}" class="btn btn-lg btn-rounded gradient-btn">Sign Up now!</a>
+                                        {% else %}
+                                            <a href="{{ path('fos_user_registration_register') }}" class="btn btn-lg btn-rounded gradient-btn">Sign Up now!</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#slider-main" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#slider-main" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</section>

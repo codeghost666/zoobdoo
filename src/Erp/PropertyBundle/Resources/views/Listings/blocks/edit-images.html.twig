@@ -1,0 +1,57 @@
+{% set propertyImages = property.getImages()|length ? property.getImages() : null %}
+
+<div class="carousel-wrapper">
+    <div class="carousel slide article-slide" id="article-photo-carousel">
+        <div class="carousel-inner cont-slider" role="listbox">
+            {% if propertyImages %}
+                {% for image in propertyImages %}
+					<div class="item {{ loop.first ? 'active' : ''}}" data-target="#article-photo-carousel">
+						{% set imgSrc = (image and image.getPath() and image.getName()) ? asset(image.getPath() ~ '/' ~ image.getName()) : null %}
+						<img id="new-image-{{ loop.index - 1 }}" alt="" title="" src="{{ imgSrc ? imgSrc|imagine_filter('property_details_carousel_inner') : '' }}">
+					</div>
+                {% endfor %}
+            {% else %}
+                <div class="item active first-screen-img">
+                    <img alt="" title="" src="https://placehold.it/325x300">
+                </div>
+            {% endif %}
+        </div>
+        <a class="left carousel-control" href="#article-photo-carousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#article-photo-carousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <div class="image-add-block">
+            <a href="#" class="image-upload" id="add-another-image">
+                <span>add</span>
+                <span class="image-add">&plus;</span>
+            </a>
+        </div>
+        <div class="article-photo">
+            <ol class="carousel-indicators">
+                {% for image in propertyImages %}
+						<li class="active" data-slide-to="{{ loop.index - 1 }}" data-target="#article-photo-carousel">
+							<a href="#" class="image-delete" data-image-attr-count="{{ loop.index - 1 }}">&minus;</a>
+							{% set imgSrc = (image and image.getPath() and image.getName()) ? asset(image.getPath() ~ '/' ~ image.getName()) : null %}
+							<img id="new-image-{{ loop.index - 1 }}" alt="" src="{{ imgSrc ? imgSrc|imagine_filter('property_details_carousel_indicators') : '' }}">
+						</li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="hide">
+            <ul id="images-fields-list">
+                {% for imageField in form.images %}
+					{% if imageField.vars.value.id %}
+						<li id="new-form-image-field-{{ loop.index - 1 }}">
+							{{ form_widget(imageField) }}
+							{{ form_custom_errors.widget(imageField) }}
+						</li>
+					{% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

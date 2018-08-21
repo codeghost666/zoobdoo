@@ -1,0 +1,68 @@
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+
+<div class="profile-widget-item">
+    <div class="widget-title-row">
+        <div class="login-block-title bold-text">Payment History</div>
+    </div>
+    <div class="history-block">
+        <div class="payment-history">
+            <ul class="payment-table-title">
+                <li><span class="col-xs-2 bold-text">Date:</span><span
+                            class="col-xs-4 bold-text">Address:</span><span
+                            class="col-xs-2 bold-text amount-col">Amount:</span><span
+                            class="col-xs-3 bold-text">Notes:</span></li>
+            </ul>
+            <ul class="payment-table">
+                {% for history in psHistories %}
+                    <li>
+                        <span class="col-xs-2">{{ history.getPaymentDate()|date('m/d/Y') }}</span>
+                        <span class="col-xs-4">{{ history.getProperty().getFullAddress() }}</span>
+                        <span class="col-xs-2 amount-col">${{ history.getAmount() }}</span>
+                        <span class="col-xs-3 notes-col">
+                            {% if history.getStatus() == constant('Erp\\PaymentBundle\\Entity\\PaySimpleHistory::STATUS_SUCCESS') %}
+								Payment Success
+                            {% else %}
+								Payment Error
+                            {% endif %}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+		{{ form_start(form, { attr: {'class': 'payment-calendar'}, 'enctype': form_enctype(form)}) }}
+
+            <div class="input-group date date-start">
+                <div class="form-group">
+					{{ form_label(form.startDate) }}
+					{{ form_widget(form.startDate) }}
+					{{ form_custom_errors.widget(form.startDate) }}
+                    <span class="input-group-addon"></span>
+                </div>
+            </div>
+            <div class="input-group date date-end">
+                <div class="form-group">
+					{{ form_label(form.endDate) }}
+					{{ form_widget(form.endDate) }}
+					{{ form_custom_errors.widget(form.endDate) }}
+                    <span class="input-group-addon"></span>
+                </div>
+            </div>
+            <div class="edit-row">
+				{% if user.isReadOnlyUser() %}
+					<a class="btn edit-btn" href="{{ path('erp_user_profile_read_only_popup') }}" role="popup">export report</a>
+				{% else %}
+					{{ form_widget(form.pdf_submit) }}
+					{{ form_widget(form.csv_submit) }}
+				{% endif %}
+            </div>
+		<div class="hide">
+			{{ form_end(form) }}
+		</div>
+    </div>
+    <hr>
+    <div class="question-mark">
+        <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'payment_history'}) }}">&#063;</a>
+    </div>
+
+</div>

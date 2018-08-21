@@ -1,0 +1,71 @@
+@import 'module-style/main.scss';
+@import 'module-style/select.scss';
+@import 'module-style/homepage.scss';
+@import 'module-style/register.scss';
+@import 'module-style/login.scss';
+@import 'module-style/modal.scss';
+@import 'module-style/properties.scss';
+@import 'module-style/messages.scss';
+@import 'module-style/documentation.scss';
+@import 'module-style/forum.scss';
+@import 'module-style/rent.scss';
+@import 'module-style/listings.scss';
+@import 'module-style/accounting.scss';
+@import 'module-style/static.scss';
+@import 'module-style/profile.scss';
+@import 'module-style/upload.scss';
+@import 'module-style/contract.scss';
+@import 'module-style/editor.scss';
+@import 'module-style/media.scss';
+@import 'module-style/preloader.scss';
+@import 'module-style/applicationForm.scss';
+@import 'module-style/notifications.scss';
+
+/* font-family: "LatoRegular"; */
+@font-face {
+    font-family: "LatoRegular";
+    src: url("../fonts/Lato/Lato-Regular.eot");
+    src: url("../fonts/Lato/Lato-Regular.eot") format("embedded-opentype"), url("../fonts/Lato/Lato-Regular.woff") format("woff"), url("../fonts/Lato/Lato-Regular.ttf") format("truetype");
+}
+
+/* font-family: "LatoBold"; */
+@font-face {
+    font-family: "LatoBold";
+    src: url("../fonts/Lato/Lato-Bold.eot");
+    src: url("../fonts/Lato/Lato-Bold.eot") format("embedded-opentype"), url("../fonts/Lato/Lato-Bold.woff") format("woff"), url("../fonts/Lato/Lato-Bold.ttf") format("truetype");
+}
+
+/* font-family: "LatoLight"; */
+@font-face {
+    font-family: "LatoLight";
+    src: url("../fonts/Lato/Lato-Light.ttf");
+    src: url("../fonts/Lato/Lato-Light.eot") format("embedded-opentype"), url("../fonts/Lato/Lato-Light.woff") format("woff"), url("../fonts/Lato/Lato-Light.ttf") format("truetype");
+}
+
+/* font-family: "LatoLight"; */
+@font-face {
+    font-family: "LatoBlack";
+    src: url("../fonts/Lato/Lato-Black.eot");
+    src: url("../fonts/Lato/Lato-Black.eot") format("embedded-opentype"), url("../fonts/Lato/Lato-Black.woff") format("woff"), url("../fonts/Lato/Lato-Black.ttf") format("truetype");
+}
+
+/* font-family: "NunitoRegular"; */
+@font-face {
+    font-family: "NunitoRegular";
+    src: url("../fonts/Nunito/Nunito-Regular.eot");
+    src: url("../fonts/Nunito/Nunito-Regular.eot") format("embedded-opentype"), url("../fonts/Nunito/Nunito-Regular.woff") format("woff"), url("../fonts/Nunito/Nunito-Regular.ttf") format("truetype");
+}
+
+/* font-family: "NunitoBold"; */
+@font-face {
+    font-family: "NunitoBold";
+    src: url("../fonts/Nunito/Nunito-Bold.eot");
+    src: url("../fonts/Nunito/Nunito-Bold.eot") format("embedded-opentype"), url("../fonts/Nunito/Nunito-Bold.woff") format("woff"), url("../fonts/Nunito/Nunito-Bold.ttf") format("truetype");
+}
+
+/* font-family: "NunitoLight"; */
+@font-face {
+    font-family: "NunitoLight";
+    src: url("../fonts/Nunito/Nunito-Light.eot");
+    src: url("../fonts/Nunito/Nunito-Light.eot") format("embedded-opentype"), url("../fonts/Nunito/Nunito-Light.woff") format("woff"), url("../fonts/Nunito/Nunito-Light.ttf") format("truetype");
+}

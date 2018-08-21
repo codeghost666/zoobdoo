@@ -1,0 +1,25 @@
+erp_user_landlords:
+    path:     /landlords
+    defaults: { _controller: ErpUserBundle:Landlord:index }
+    methods: [GET]
+
+erp_user_landlords_create:
+    path:     /landlords/create
+    defaults: { _controller: ErpUserBundle:Landlord:create }
+    methods: [GET, POST]
+
+erp_user_landlords_charge:
+    path:     /landlords/charge
+    defaults: { _controller: ErpUserBundle:Landlord:charge }
+    methods: [GET, POST]
+
+erp_user_landlords_confirm_charge:
+    path:     /charge/confirm/{type}/{token}
+    defaults: { _controller: ErpUserBundle:Landlord:confirmCharge }
+    methods: [GET, POST]
+
+erp_user_landlords_choose_charge_type:
+    path:     /charge/{token}
+    defaults: { _controller: ErpUserBundle:Landlord:chooseChargeType }
+    methods: [GET]
+

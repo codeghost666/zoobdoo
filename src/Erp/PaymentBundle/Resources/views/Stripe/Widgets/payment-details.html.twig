@@ -1,0 +1,129 @@
+{% set cc = constant('Erp\\PaymentBundle\\Entity\\StripeCustomer::CREDIT_CARD') %}
+{% set ba = constant('Erp\\PaymentBundle\\Entity\\StripeCustomer::BANK_ACCOUNT') %}
+
+
+<div class="profile-widget-item">
+    <div class="widget-title-row">
+        <div class="login-block-title bold-text">Bank {% if app.user.hasRole('ROLE_TENANT') %}&amp; Cards {% endif %}
+            Information
+        </div>
+    </div>
+
+    {#TODO Optimize #}
+    {% if app.user.hasRole('ROLE_TENANT') %}
+        {% if creditCard or bankAccount %}
+            <div class="bank-info-row">
+                <div class="col-xs-6">
+                    {% if creditCard is null %}
+                        <div class="bank-details">
+                            Cards information is not added yet
+                        </div>
+                        <div class="edit-row text-center">
+                            <a type="submit" href="{{ path('erp_payment_stripe_save_credit_card') }}" class="btn edit-btn">
+                                add card info
+                            </a>
+                        </div>
+                    {% else %}
+                        <div class="bank-details">
+                            <div class="bank-card">
+                                <span>{{ creditCard.name }}</span>
+                                <span>**** **** **** {{ creditCard.last4 }}</span>
+                            </div>
+                        </div>
+                        <div class="edit-row">
+                            <a type="submit" href="{{ path('erp_payment_stripe_save_credit_card') }}"
+                               class="btn edit-btn">edit</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-xs-6">
+                    {% if bankAccount is null %}
+                        <div class="bank-details">
+                            Bank information is not added yet
+                        </div>
+                        <div class="edit-row verify-ba">
+                            <button id='verify-ba' class="btn edit-btn">Verify bank account</button>
+                        </div>
+                    {% else %}
+                        <div class="bank-details">
+                            <div class="bank-title"><span class="bank-icon"></span><span>{{ bankAccount.bank_name }}</span>
+
+                            </div>
+                            <div class="bank-card"><span class="icon-user"></span><span>{{ bankAccount.account_holder_name }}</span></div>
+                            <div class="bank-card"><span class="bg-check"></span><span>{{ bankAccount.routing_number }}</span></div>
+                        </div>
+                        <div class="edit-row verify-ba">
+                            <button id='verify-ba' class="btn edit-btn">Verify bank account</button>
+                        </div>
+
+                    {% endif %}
+                </div>
+            </div>
+        {% else %}
+            <div class="bank-info-row">
+                <div class="edit-row">
+                    <span>Please add Bank or Cards information in order to pay rent.</span>
+                </div>
+            </div>
+            <div class="bank-info-row">
+                <div class="col-xs-6">
+                    <div class="edit-row">
+                        <a type="submit" href="{{ path('erp_payment_stripe_save_credit_card') }}"
+                           class="btn edit-btn">add card info</a>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="edit-row verify-ba">
+                        <button id='verify-ba' class="btn edit-btn">Verify bank account</button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endif %}
+    {% else %}
+        {% if bankAccount %}
+            <div class="bank-info-row">
+                <div class="col-xs-12">
+                    <div class="">
+                        <div class="bank-details col-xs-9">
+                            <div class="bank-title"><span class="bank-icon"></span><span>{{ bankAccount.bank_name }}</span></div>
+                            <div class="bank-card"><span>Account Holder Name: {{ bankAccount.account_holder_name }}</span></div>
+                            <div class="bank-card"><span>Routing Number: {{ bankAccount.routing_number }}</span></div>
+                        </div>
+                        <div class="edit-row text-right">
+                            <button id='verify-ba' class="btn btn-space edit-btn">Verify</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <hr>
+        {% else %}
+            <div class="bank-info-row">
+                <div class="col-xs-12">
+                    <div class="edit-row verify-ba">
+                        <button id='verify-ba' class="btn edit-btn" {% if app.session.flashBag.has('show_navigation_sign_after_register') %}style="position: relative"{% endif %}>
+                            {% if app.session.flashBag.has('show_navigation_sign_after_register') %}
+                                {# TODO Refactoring #}
+                                {{ app.session.flashBag.get('show_navigation_sign_after_register')[0] }}
+                                <div class="tooltip_btn">Become a member<br> now and gain access <br>to all of our services!<br> Just verify your<br> bank information here.</div>
+                                {% endif %}
+                            Verify
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        {% endif %}
+    {% endif %}
+
+    <div class="question-mark">
+        {% if app.user.hasRole('ROLE_TENANT') %}
+            <a role="popup"
+               href="{{ path('erp_user_profile_hint_content', {'hintCode':'tenant_bank_and_card_information'}) }}">&#063;</a>
+        {% else %}
+            <a role="popup"
+               href="{{ path('erp_user_profile_hint_content', {'hintCode':'manager_bank_and_card_information'}) }}">&#063;</a>
+        {% endif %}
+    </div>
+</div>

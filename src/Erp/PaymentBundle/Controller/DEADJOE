@@ -1,0 +1,31 @@
+
+*** These modified files were found in JOE when it aborted on Wed May 25 13:06:15 2016
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+kx
+
+*** File '(Unnamed)'
+rotate
+host
+cpbackup
+backup_root
+dest_path
+dest_path
+archive
+host
+age
+SSLC
+
+*** File '(Unnamed)'
+/var/www/src/Erp/PaymentBundle/Resources/config/parameters.yml
+/var/www/src/Erp/PaymentBundle/Resources/views/PaySimple/Widgets/bank-cards-info.html.twig
+/var/www/src/Erp/PaymentBundle/Resources/views/PaySimple/Widgets/bank-cards-info.html.twig
+/var/www/src/Erp/AdminBundle/Admin/Fees.php
+/var/www/src/Erp/PaymentBundle/Resources/views/PaySimple/Widgets/bank-cards-info.html.twig
+/etc/apache2/sites-enabled/erentpay.conf
+/etc/apache2/sites-enabled/erentpay.conf
+/etc/apache2/sites-enabled/erentpay.conf
+/etc/apache2/sites-enabled/erentpay.conf
+/var/www/src/Erp/UserBundle/Services/UserService.php
+/var/www/src/Erp/PaymentBundle/Controller/PaySimpleController.php

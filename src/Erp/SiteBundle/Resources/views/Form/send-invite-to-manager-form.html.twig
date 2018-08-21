@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    //force redirect if opened in new tab
+    var pageLocation = "{{ absolute_url(path('erp_site_send_invite_to_manager')) }}";
+    if (location == pageLocation) document.location = "{{ path('erp_site_homepage') }}";
+</script>
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+
+{{ form_start(form, { attr: {'class': 'form-horizontal'}, 'enctype': form_enctype(form)}) }}
+<div class="row">
+    <div class="form-group">
+        <div class="col-sm-6">
+            {{ form_label(form.managerFirstName) }}
+            {{ form_widget(form.managerFirstName) }}
+            {{ form_custom_errors.widget(form.managerFirstName) }}
+        </div>
+        <div class="col-sm-6">
+            {{ form_label(form.managerLastName) }}
+            {{ form_widget(form.managerLastName) }}
+            {{ form_custom_errors.widget(form.managerLastName) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            {{ form_label(form.managerEmail) }}
+            {{ form_widget(form.managerEmail) }}
+            {{ form_custom_errors.widget(form.managerEmail) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            {{ form_label(form.tenantEmail) }}
+            {{ form_widget(form.tenantEmail) }}
+            {{ form_custom_errors.widget(form.tenantEmail) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            {{ form_label(form.message) }}
+            {{ form_widget(form.message) }}
+            {{ form_custom_errors.widget(form.message) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="button-wrap">
+                {{ form_widget(form.submit) }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

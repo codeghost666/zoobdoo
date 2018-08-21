@@ -1,0 +1,28 @@
+services:
+    erp_stripe.form.type.credit_card:
+        class: Erp\StripeBundle\Form\Type\CreditCardType
+        tags:
+            - { name: form.type, alias: erp_stripe_credit_card }
+
+    erp_stripe.form.credit_card:
+        class: Symfony\Component\Form\Form
+        factory: 'form.factory:createNamed'
+        arguments: ['erp_stripe_credit_card', 'erp_stripe_credit_card', null]
+
+    erp_stripe.form.type.plaid_bank_account:
+        class: Erp\StripeBundle\Form\Type\PlaidBankAccountType
+        tags:
+            - { name: form.type, alias: erp_stripe_plaid_bank_account }
+        arguments:
+            - '@erp_plaid.service.item'
+            - '@erp_plaid.service.processor'
+
+    erp_stripe.form.stripe_plaid_bank_account:
+        class: Symfony\Component\Form\Form
+        factory: 'form.factory:createNamed'
+        arguments: ['erp_stripe_plaid_bank_account', 'erp_stripe_plaid_bank_account', null]
+
+    erp_stripe.form.type.account_verification:
+        class: Erp\StripeBundle\Form\Type\AccountVerificationType
+        tags:
+            - { name: form.type, alias: erp_stripe_bank_account_verification }

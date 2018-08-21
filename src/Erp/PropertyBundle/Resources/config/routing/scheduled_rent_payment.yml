@@ -1,0 +1,11 @@
+erp_property_scheduled_rent_payment_rent:
+    path:     /property/pay-rent
+    defaults: { _controller: ErpPropertyBundle:ScheduledRentPayment:payRent }
+    methods: [POST]
+
+erp_property_scheduled_stop_auto_withdrawal:
+    path:     /property/stop-auto-withdrawal/{user}
+    defaults: { _controller: ErpPropertyBundle:ScheduledRentPayment:stopAutoWithdrawal }
+    requirements:
+        user: \d+
+    methods: [POST]

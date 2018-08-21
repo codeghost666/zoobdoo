@@ -1,0 +1,45 @@
+erp_esign_form:
+    path:     /esign/{documentId}
+    defaults: { _controller: ErpSignatureBundle:Signature:esign }
+    requirements:
+        documentId: \d+
+    methods: [GET, POST]
+
+erp_signature_signature_edit_envelop:
+    path:     /envelop/edit/{userDocumentId}
+    defaults: { _controller: ErpSignatureBundle:Signature:editEnvelop }
+    requirements:
+        userDocumentId: \d+
+    methods: [GET, POST]
+
+erp_signature_webhook_notify:
+    path: /endpoint/docusign/notify
+    defaults: { _controller: ErpSignatureBundle:Webhook:notify }
+
+erp_signature_hellosign_edit_envelop:
+    path:     /envelop/hellosign/edit/{userDocumentId}
+    defaults: { _controller: ErpSignatureBundle:Signature:editEnvelopHelloSign }
+    requirements:
+        userDocumentId: \d+
+    methods: [POST]
+
+erp_signature_hellosign_webhook_savesignature:
+    path:     /envelop/hellosign/save/{userDocumentId}
+    defaults: { _controller: ErpSignatureBundle:Signature:saveEnvelopAfterHelloSign }
+    requirements:
+        userDocumentId: \d+
+    methods: [POST]
+
+erp_signature_hellosign_manage_template:
+    path:     /template/hellosign/manage/{userDocumentId}
+    defaults: { _controller: ErpSignatureBundle:Signature:manageTemplateHelloSign }
+    requirements:
+        userDocumentId: \d+
+    methods: [POST]
+
+erp_signature_hellosign_remove_template:
+    path:     /template/hellosign/remove/{userDocumentId}
+    defaults: { _controller: ErpSignatureBundle:Signature:removeTemplateHelloSign }
+    requirements:
+        userDocumentId: \d+
+    methods: [POST]

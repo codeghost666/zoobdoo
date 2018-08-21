@@ -1,0 +1,60 @@
+{% extends 'ErpSiteBundle::base.html.twig' %}
+
+{% block headerBannerTitle %}
+    {{ page.headerTitle|e }}
+{% endblock %}
+
+{% block pageContent %}
+
+    <!-- About -->
+    <div class="page-content">
+
+        <section id="about" class="about">
+            <div class="container">
+                {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+                <div class="row">
+                    <div class="col-xs-12 search-col">
+                        <form action="{{ path('fos_user_registration_register') }}" method="GET">
+                            <span class="search-title">Make Your Job Easier!</span>
+                            <input type="text" name="email" class="form-control" placeholder="Enter Email Address">
+                            <button type="submit" class="btn gradient-btn">SignUp!</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-{% if page.withSubmenu %}9{% else %}12{% endif %} text-col">
+                        <div class="text-title">
+                            {{ page.title|e }}
+                        </div>
+                        <div class="about-text">
+                            {{ page.content|raw }}
+                        </div>
+                        <div class="contact-form">
+                            {% include "ErpSiteBundle:StaticPage:contact-form.html.twig" %}
+                        </div>
+                    </div>
+                    <div class="col-md-3 menu-col">
+                        <ul>
+                            {% for submenuPage in submenuPages %}
+                                <li{% if submenuPage == page %} class="current"{% endif %}><a href="{{ path('erp_site_static_page', {'slug':submenuPage.slug}) }}">
+                                    <span class="fa fa-angle-right"></span>{{ submenuPage.headerTitle }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row banner-row">
+                    <div class="col-md-12">
+                        <div class="banner homepage-banner">
+                        <span class="banner-text">Wish Your <span class="bold-text">Property Manager</span> Was On <span
+                                    class="bold-text">Zoobdoo?</span></span>
+                            <a role="popup" href="{{ path('erp_site_send_invite_to_manager') }}" class="btn btn-lg btn-rounded gradient-btn">SEND eInvite</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

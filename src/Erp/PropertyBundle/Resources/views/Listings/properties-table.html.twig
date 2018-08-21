@@ -1,0 +1,46 @@
+<div class="container-fluid" id="properties-table">
+    <form name="erp_property_payment_settings_properties" action="{{ path('erp_property_confirm_settings') }}">
+        <table class="table">
+            <thead>
+            <tr>
+                <td><label for="checkAll">Select All<input id="checkAll" type="checkbox" name="all_elements"></label></td>
+                <td>Property</td>
+                <td>Address</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for property in properties %}
+                <tr>
+                    <td><input type="checkbox" name="idx[]" class="check" value="{{ property.id }}"></td>
+                    <td>{{ property.name }}</td>
+                    <td>{{ property.address }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="col-md-12">
+            <button
+                    class="btn edit-btn"
+                    step="properties-settings"
+                    role="back"
+            >
+                Back
+            </button>
+            <button
+                    url="{{ path('erp_property_confirm_settings') }}"
+                    type="submit"
+                    class="btn edit-btn"
+                    step="properties-confirmation"
+            >
+                Next
+            </button>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $("#checkAll").click(function () {
+        $(".check").prop('checked', $(this).prop('checked'));
+    });
+</script>
+

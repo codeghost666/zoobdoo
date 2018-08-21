@@ -1,0 +1,101 @@
+{% set cc = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::CREDIT_CARD') %}
+{% set ba = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::BANK_ACCOUNT') %}
+
+<div class="col-md-5 col-xs-6 profile-widget-item widget-last">
+    <div class="row widget-title-row">
+        <div class="login-block-title bold-text">Bank &amp; Cards Information</div>
+    </div>
+
+    {% if userCCInfo or userBAInfo %}
+        <div class="row bank-info-row">
+            <div class="col-xs-6">
+                {% if userCCInfo['status'] == false %}
+                    <div class="bank-details">
+                        Cards information is not added yet
+                    </div>
+                    <div class="row edit-row">
+                        <a type="submit" href="{{ path('erp_payment_ps_create_account', {'type' : cc}) }}" class="btn edit-btn">
+                            add card info
+                        </a>
+                    </div>
+                {% else %}
+                    <div class="bank-details">
+                        <div class="bank-card">
+                            <span >{{ userCCInfo['data']['Issuer'] }}</span>
+                            <span>{{ userCCInfo['data']['CreditCardNumber'] }}</span>
+                        </div>
+                        {% if psCustomer and psCustomer.getPrimaryType() == cc %}
+                            <div class="primary-account">Primary, Account</div>
+                        {% endif %}
+                    </div>
+                    <div class="row edit-row">
+                        <a type="submit" href="{{ path('erp_payment_ps_create_account', {'type' : cc}) }}" class="btn edit-btn">edit</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-xs-6">
+                {% if userBAInfo['status'] == false %}
+                        <div class="bank-details">
+                            Bank information is not added yet
+                        </div>
+                        <div class="row edit-row">
+                            <a type="submit" href="{{ path('erp_payment_ps_create_account', {'type' : ba}) }}" class="btn edit-btn">
+                                add bank info
+                            </a>
+                        </div>
+                {% else %}
+                    <div class="bank-details">
+                        <div class="bank-title"><span class="bank-icon"></span><span>{{ userBAInfo['data']['BankName'] }}</span></div>
+                        <div class="bank-card"><span>{{ userBAInfo['data']['AccountNumber'] }}</span></div>
+                        <div class="bank-card"><span>{{ userBAInfo['data']['RoutingNumber'] }}</span></div>
+                        {% if psCustomer and psCustomer.getPrimaryType() == ba %}
+                            <div class="primary-account">Primary, Account</div>
+                        {% endif %}
+                    </div>
+                    <div class="row edit-row">
+                        <a type="submit" href="{{ path('erp_payment_ps_create_account', {'type' : ba}) }}" class="btn edit-btn">edit</a>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    {% else %}
+        <div class="row bank-info-row">
+            <div class="col-xs-12">
+                {% if forTenant %}
+                    <span>
+                        Please add Bank or Cards information in order to pay rent.
+                    </span>
+                {% else %}
+                    <span>
+                        Start receiving tenant payments now.<br/>Just upload the following documents below through SendSafely (Secured and Encrypted), and fill out free merchant account form.</span>
+                        <br/>
+                        <a href="https://e-rentpay.sendsafely.com/dropzone/fwakBbMRyK1GbUugv4dynFwPgubX63NcoimDokMOU6k" target="_blank" style="color:#000; padding-bottom: 5px; font-weight: bold;">Document Upload Form</a>&nbsp;&nbsp;&nbsp;<a href="https://paysimple.com/partners/partner_lead_entry.html?pID=eRentPay" target="_blank" style="color:#000; padding-bottom: 5px; font-weight: bold;">Free Merchant Account Request</a>
+                        Questions?<br/><a href="mailto:info@e-rentpay.com" style="color: #000;">info@e-rentpay.com</a>
+                    </span>
+                {% endif %}
+
+            </div>
+        </div>
+        <div class="row bank-info-row">
+            <div class="col-xs-6">
+                <div class="row edit-row custombutton">
+                    <a type="submit" href="{{ path('erp_payment_ps_create_account', {'type' : cc}) }}" class="btn edit-btn">add card info</a>
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="row edit-row custombutton">
+                    <a type="submit" href="{{ path('erp_payment_ps_create_account', {'type' : ba}) }}" class="btn edit-btn">add bank info</a>
+                </div>
+            </div>
+        </div>
+        <hr>
+    {% endif %}
+    <div class="question-mark">
+        {% if forTenant %}
+            <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'tenant_bank_and_card_information'}) }}">&#063;</a>
+        {% else %}
+            <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'manager_bank_and_card_information'}) }}">&#063;</a>
+        {% endif %}
+    </div>
+</div>

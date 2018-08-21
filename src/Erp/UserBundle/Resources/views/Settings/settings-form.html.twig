@@ -1,0 +1,28 @@
+{{ form_start(form, { attr: {'class': 'form-horizontal settings-form', 'novalidate': 'novalidate'}, 'enctype': form_enctype(form)}) }}
+<ul class="settings-list col-xs-12">
+    <li class="settings-list-item list-title-settings col-xs-12">
+        <div class="col-xs-10">Settings:</div>
+        <div class="col-xs-2 checkbox-col">On/Off</div>
+    </li>
+    {% for set in form.settings %}
+        <li class="settings-list-item col-xs-12">
+            {{ form_widget(set, { attr: {'class': 'css-checkbox'} }) }}
+            {{ form_label(set, null, { label_attr: {'class': 'css-label'} }) }}
+        </li>
+    {% endfor %}
+</ul>
+<div class="col-xs-12 send-col">
+    {{ form_label(form.secondEmail) }}
+    <div class="input-wrap">
+        {{ form_widget(form.secondEmail) }}
+        <span class="fa fa-envelope-o"></span>
+    </div>
+    {% if not user.isReadOnlyUser() %}
+        {{ form_label(form.save) }}
+        {{ form_widget(form.save) }}
+    {% endif %}
+</div>
+<div class="hide">
+    {{ form_end(form) }}
+</div>
+

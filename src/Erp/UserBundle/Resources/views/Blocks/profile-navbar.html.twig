@@ -1,0 +1,14 @@
+<div class="row">
+    <nav class="navbar secondary-profile-nav navbar-default">
+        <div class="container-fluid">
+            {% if app.user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_MANAGER')) %}
+                {% include 'ErpUserBundle:Blocks/cross:manager-navbar.html.twig' %}
+            {% elseif app.user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_LANDLORD')) %}
+                {% include 'ErpUserBundle:Blocks/cross:landlord-navbar.html.twig' %}
+            {% else %}
+                {% include 'ErpUserBundle:Blocks/cross:tenant-navbar.html.twig' %}
+            {% endif %}
+            <hr>
+        </div>
+    </nav>
+</div>

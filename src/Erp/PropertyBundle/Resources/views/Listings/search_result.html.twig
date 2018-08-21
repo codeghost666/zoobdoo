@@ -1,0 +1,34 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+    {{ parent() }}
+    <div class="page-content">
+        <section id="managers-listings" class="listings profile">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <td>Property</td>
+                                <td>Tenant</td>
+                                <td>Address</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for property in pagination %}
+                                <tr>
+                                    <td>{{ property.name }}</td>
+                                    <td>{{ property.tenantUser.fullNameWithEmail }}</td>
+                                    <td>{{ property.address }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

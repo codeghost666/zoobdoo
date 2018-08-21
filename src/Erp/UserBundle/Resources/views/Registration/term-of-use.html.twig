@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% set headerWhiteClass = true %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/register.js') }}"></script>
+{% endblock %}
+
+{% block headerBannerTitle %}
+    Terms of Use
+{% endblock %}
+
+{% block pageContent %}
+    <section id="register-form-tenants" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Register</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p class="text-center">You must read and accept Zoobdoo Terms of Use before you can start using our website.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% include "ErpUserBundle:Registration:term-of-use-form.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

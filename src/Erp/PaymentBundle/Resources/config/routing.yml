@@ -1,0 +1,7 @@
+#erp_payment_ps:
+#    resource: "@ErpPaymentBundle/Resources/config/routing/pay-simple.yml"
+#    prefix:   /payment
+
+erp_payment_stripe:
+    resource: "@ErpPaymentBundle/Resources/config/routing/stripe.yml"
+    prefix:   /payment

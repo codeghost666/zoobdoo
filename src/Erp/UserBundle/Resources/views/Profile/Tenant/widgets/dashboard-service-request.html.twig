@@ -1,0 +1,10 @@
+<div class="col-md-5 col-xs-12 profile-widget-item widget-first request-item tenants-block-middle">
+    <div class="row widget-title-row">
+        <div class="login-block-title bold-text">Service Requests</div>
+    </div>
+    {% include "ErpUserBundle:Profile/Tenant/widgets:dashboard-service-request-form.html.twig" %}
+    <hr>
+    <div class="question-mark">
+        <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'service_requests'}) }}">&#063;</a>
+    </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="col-md-8 col-xs-12 profile-widget-item history-item">
+    {% include 'ErpSmartMoveBundle:SmartMove:credit-report.html.twig' with {'report' : reports['CreditReport']} %}
+    {% include 'ErpSmartMoveBundle:SmartMove:criminal-records.html.twig' with {'report' : reports['CriminalRecords']} %}
+    {% include 'ErpSmartMoveBundle:SmartMove:eviction-records.html.twig' with {'report' : reports['EvictionRecords']} %}
+</div>

@@ -1,0 +1,85 @@
+<header class="header-navbar {% if headerWhiteClass|default(false) %} header-navbar-white {% endif %}">
+    <div class="container container-nav">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar main-nav navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-col" aria-expanded="false">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="mobile-menu">
+                                <a href="{{ path('erp_site_homepage') }}" class="logo"></a>
+                                <ul class="mobile-btn">
+                                    {% if app.user is null or not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                        <li class="home-btn">
+                                            <a class="homepage-button-mobile login-button" href="{{ path('fos_user_security_login') }}">
+                                                {{ 'login'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        </li>
+                                        <li class="home-btn">
+                                            <a class="homepage-button-mobile signup-button" href="{{ path('fos_user_registration_register') }}">
+                                                {{ 'signup'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        {% set user = app.security.getToken() %}
+                                        <li class="home-btn">
+                                            {% if app.user is not null and is_granted("ROLE_ADMIN") %}
+                                                <a class="homepage-button-mobile login-button" href="{{ path('sonata_admin_dashboard') }}">
+                                                    {{ 'admin'|trans({}, 'FOSUserBundle') }}
+                                                </a>
+                                            {% else %}
+                                                <a class="homepage-button-mobile login-button" href="{{ path('erp_user_profile_dashboard') }}">
+                                                    {{ 'profile'|trans({}, 'FOSUserBundle') }}
+                                                </a>
+                                            {% endif %}
+                                        </li>
+                                        <li class="home-btn">
+                                            <a class="homepage-button-mobile signup-button" href="{{ path('fos_user_security_logout') }}">
+                                                {{ 'logout'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="collapse navbar-collapse white-navbar" id="navbar-col">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="menu-home" class="active"><a href="{{ path('erp_site_homepage') }}">home</a></li>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'about'}) }}">about</a></li>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'manager-features'}) }}">features</a></li>
+                                <li><a href="{{ path('erp_site_static_page', {'slug':'faq'}) }}">faq</a></li>
+                                <li class="contact"><a href="{{ path('erp_site_static_page', {'slug':'contact'}) }}">contact</a></li>
+                                {% if app.user is null or not is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+                                    <li class="home-btn"><a class="homepage-button login-button" href="{{ path('fos_user_security_login') }}">{{ 'login'|trans({}, 'FOSUserBundle') }}</a></li>
+                                    <li class="home-btn"><a class="homepage-button signup-button" href="{{ path('fos_user_registration_register') }}">{{ 'signup'|trans({}, 'FOSUserBundle') }}</a></li>
+                                {% else %}
+                                    {% if app.user is not null and is_granted("ROLE_ADMIN") %}
+                                        <li class="home-btn">
+                                            <a class="homepage-button login-button" href="{{ path('sonata_admin_dashboard') }}">
+                                                {{ 'admin'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        </li>
+                                    {% else %}
+                                        <li class="home-btn">
+                                            <a class="homepage-button login-button" href="{{ path('erp_user_profile_dashboard') }}">
+                                                {{ 'profile'|trans({}, 'FOSUserBundle') }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    <li class="home-btn"><a class="homepage-button signup-button" href="{{ path('fos_user_security_logout') }}">{{ 'logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

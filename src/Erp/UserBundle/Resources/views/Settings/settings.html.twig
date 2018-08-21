@@ -1,0 +1,35 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <section id="profile-settings" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Your Settings</h1>
+                </div>
+            </div>
+
+            <div class="row profile-widget-row settings-row">
+                <div class="col-xs-12 profile-widget-item">
+                    <div class="row widget-title-row">
+                        <div class="login-block-title bold-text">Manage Notifications</div>
+                    </div>
+                    <div class="settings-block">
+                        <p>Please use the check boxes below to select which items to receive notifications on. Once complete, be sure to click 
+                        Save Changes at bottom for your changes to take place.</p>
+                        <div class="settings-form-table col-md-9 col-md-offset-2">
+                            {% include "ErpUserBundle:Settings:settings-form.html.twig" %}
+                        </div>
+                        <hr>
+                        <div class="question-mark">
+                            <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'manager_settings'}) }}">&#063;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

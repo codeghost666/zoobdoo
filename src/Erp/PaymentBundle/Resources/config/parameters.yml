@@ -1,0 +1,16 @@
+parameters:
+    paysimple.user_name: "APIUser44005"
+    paysimple.api_secret_code: "xdqRjXlXMJPfEJcl5MLOhzeIEcSd3l4F0QwbS3HNsbswZBxd6Nzw5sxi6nqkmsUIuLCylebvS4WhSlzukvhHEwEl3Rf1PYqcf0utNdKbe7spXxpXdW7ENW0Diczg7vZ0"
+
+    paysimple.api.endpoint.test: "https://sandbox-api.paysimple.com"
+    paysimple.api.endpoint.live: "https://api.paysimple.com"
+
+    paysimple.api.test_mode: false
+
+    stripe.public_key: '%stripe.public.key%'
+    stripe.secret_key: '%stripe.secret.key%'
+
+    plaid.client_id: '%plaid.client.id%'
+    plaid.public_key: '%plaid.public.key%'
+    plaid.secret_key: '%plaid.secret.key%'
+    plaid_env: '%plaid.env%'

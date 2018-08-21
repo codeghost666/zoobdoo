@@ -1,0 +1,102 @@
+{{ form_start(form, { attr: {'class': 'form-horizontal account-details', 'novalidate': 'novalidate'}, 'enctype': form_enctype(form)}) }}
+<div class="row">
+    <div class="form-group">
+        <div class="col-xs-12 profile-picture-upload">
+            <div class="upload-form">
+                <div class="errors">{{ form_custom_errors.widget(form.image.image) }}</div>
+                {{ form_label(form.image.image) }}
+                {{ form_widget(form.image.image) }}
+            </div>
+            {% if user.image and user.image.path %}
+                <div class="account-photo">
+                    <img src="{{ asset(user.image.path ~ '/' ~ user.image.name) | imagine_filter('profile_image') }}"/>
+                </div>
+                <a role="popup" href="{{ path('erp_user_details_delete_photo') }}" style="color: #ca171b;">X</a>
+            {% else %}
+                <div class="account-photo">
+                    <img src="/assets/images/profile/User.png">
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% if (user.hasRole(constant('Erp\\UserBundle\\Entity\\User::ROLE_MANAGER'))) %}
+    <div class="row">
+        <div class="form-group">
+            <div class="col-xs-12 profile-picture-upload">
+                <div class="upload-form">
+                    <div class="errors">{{ form_custom_errors.widget(form.logo.image) }}</div>
+                    {{ form_label(form.logo) }}<br />
+                    (to be used for invoices)
+                    {{ form_widget(form.logo.image) }}
+                </div>
+                {% if user.logo and user.logo.path %}
+                    <div class="account-photo">
+                        <img src="{{ asset(user.logo.path ~ '/' ~ user.logo.name) | imagine_filter('profile_image') }}"/>
+                    </div>
+                    <a role="popup" href="{{ path('erp_user_details_delete_logo') }}" style="color: #ca171b;">X</a>
+                {% else %}
+                    <div class="account-photo">
+                        <img src="/assets/images/profile/Logo.png" width="90">
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group" id="company-name">
+                {{ form_label(form.companyName) }}
+                {{ form_widget(form.companyName) }}
+                {{ form_custom_errors.widget(form.companyName) }}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class="row">
+    <div class="form-group">
+        <div class="col-xs-6">
+            {{ form_label(form.firstName) }}
+            {{ form_widget(form.firstName) }}
+            {{ form_custom_errors.widget(form.firstName) }}
+        </div>
+        <div class="col-xs-6">
+            {{ form_label(form.lastName) }}
+            {{ form_widget(form.lastName) }}
+            {{ form_custom_errors.widget(form.lastName) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group">
+        <div class="col-md-4 old-password-col">
+            {{ form_label(form.oldPassword) }}
+            {{ form_widget(form.oldPassword) }}
+            {{ form_custom_errors.widget(form.oldPassword) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_label(form.plainPassword.first) }}
+            {{ form_widget(form.plainPassword.first) }}
+            {{ form_custom_errors.widget(form.plainPassword.first) }}
+        </div>
+        <div class="col-md-4">
+            {{ form_label(form.plainPassword.second) }}
+            {{ form_widget(form.plainPassword.second) }}
+            {{ form_custom_errors.widget(form.plainPassword.second) }}
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-footer">
+            <a class="back-dashboard" href="{{ path('erp_user_profile_dashboard') }}">Back to Dashboard</a>
+            {{ form_widget(form.save) }}
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

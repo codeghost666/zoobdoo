@@ -1,0 +1,17 @@
+{% if app.session.flashbag.has(alert_ok)|default(false)  %}
+    {% for flashMessage in app.session.flashbag.get( alert_ok ) %}
+        <div class="alert alert-success alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if app.session.flashbag.has(alert_error)|default(false)  %}
+    {% for flashMessage in app.session.flashbag.get( alert_error ) %}
+        <div class="alert alert-danger alert-dismissable">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+{% endif %}

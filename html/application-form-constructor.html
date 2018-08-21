@@ -1,0 +1,601 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta name="title" content="">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="../web/assets/styles/style.min.css"/>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header-navbar header-navbar-white">
+    <div class="container container-nav">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar main-nav navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                    data-target="#navbar-col" aria-expanded="false">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div class="mobile-menu">
+                                <a href="" class="logo"></a>
+                                <ul class="mobile-btn">
+                                    <li class="home-btn"><a class="homepage-button-mobile login-button"
+                                                            href="">login</a></li>
+                                    <li class="home-btn"><a class="homepage-button-mobile signup-button"
+                                                            href="">signup</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="collapse navbar-collapse white-navbar" id="navbar-col">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="menu-home" class="active"><a href="">home</a></li>
+                                <li class="current"><a href="">about</a></li>
+                                <li class=""><a href="">features</a></li>
+                                <li><a href="">faq</a></li>
+                                <li class="contact"><a href="">contact</a></li>
+                                <li class="home-btn"><a class="homepage-button login-button" href="">login</a></li>
+                                <li class="home-btn"><a class="homepage-button signup-button" href="">signup</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Header Banner -->
+<section id="header-banner" class="header-banner"
+         style="background: url(../web/assets/images/page-banner.png) no-repeat;">
+    <div class="header-overlay"></div>
+    <div class="header-block">
+        <div class="centerize-header-block">
+            <span>Landlords</span>
+        </div>
+    </div>
+</section>
+
+<!-- Application Form Constructor-->
+<section id="rental-form-constructor" class="register-form rental-form">
+    <div class="container">
+        <div class="row">
+            <div class="title-block">
+                <h1 class="bold-text">Create Online Rental Application</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <form class="form-horizontal">
+
+                    <div class="row">
+                        <div class="form-group section-block app-info-block" data-attribute="1">
+                            <div class="block-title">
+                                <a href="" class="delete-btn" data-toggle="modal"
+                                   data-target="#confirmation-popup">×</a>
+                                <span class="section-title">Applicant Information</span>
+                                <input type="text" class="form-control section-title-input">
+                                <span class="edit-section-btn"><span class="fa fa-pencil"></span>Edit</span>
+                                <a href="" class="cancel-btn title-btn"> Cancel </a>
+                                <a href="" class="ok-btn title-btn">Ok</a>
+                                <a href="" class="add-field-btn">&plus; Add Field</a>
+                            </div>
+                            <div class="col-xs-12 block-fields">
+                                <div class="constructor-col">
+                                    <div class="col-xs-6 dropdown-col">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true"><span
+                                                    class="select-container"></span></button>
+                                            <ul class="companions-list dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li class="">Text Field</li>
+                                                <li class="">Checkbox</li>
+                                                <li class="">Radio Button</li>
+                                                <li class="">File Field</li>
+                                            </ul>
+                                        </div>
+                                        <div class="option-col form-group">
+                                            <label class="control-label">Option <span
+                                                    class="option-counter">1</span>:</label>
+                                            <input tabindex="1" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 edit-col">
+
+                                        <div class="input-col">
+                                            <label class="control-label">Field Label</label>
+                                            <input tabindex="2" type="text" class="form-control">
+                                        </div>
+
+                                        <div class="radio-btn-col">
+                                            <a href="" class="add-option-btn red-btn btn">&plus; Add Option</a>
+                                        </div>
+                                        <div class="btn-col">
+                                            <a href="" class="cancel-btn back-dashboard constructor-btn"> Cancel </a>
+                                            <a href="" class="ok-btn btn red-btn constructor-btn">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-fields">
+                                    <div class="name-group form-group col-xs-12">
+                                        <button type="button" class="close hide-field" aria-hidden="true">×</button>
+                                        <label class="control-label">Name:</label>
+                                        <input tabindex="3" type="text" name="name" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group section-block employment-info-block" data-attribute="2">
+                            <div class="block-title">
+                                <a href="" class="delete-btn" data-toggle="modal"
+                                   data-target="#confirmation-popup">×</a>
+                                <span class="section-title">Employment Information</span>
+                                <input tabindex="4" type="text" class="form-control section-title-input">
+                                <span class="edit-section-btn"><span class="fa fa-pencil"></span>Edit</span>
+                                <a href="" class="cancel-btn title-btn"> Cancel </a>
+                                <a href="" class="ok-btn title-btn">Ok</a>
+                                <a href="" class="add-field-btn">&plus; Add Field</a>
+                            </div>
+                            <div class="col-xs-12 block-fields">
+                                <div class="constructor-col">
+                                    <div class="col-xs-6 dropdown-col">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true"><span
+                                                    class="select-container"></span></button>
+                                            <ul class="companions-list dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li class="">Text Field</li>
+                                                <li class="">Checkbox</li>
+                                                <li class="">Radio Button</li>
+                                                <li class="">File Field</li>
+                                            </ul>
+                                        </div>
+                                        <div class="option-col form-group">
+                                            <label class="control-label">Option <span
+                                                    class="option-counter">1</span>:</label>
+                                            <input tabindex="5" type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 edit-col">
+
+                                        <div class="input-col">
+                                            <label class="control-label">Field Label</label>
+                                            <input tabindex="6" type="text" class="form-control">
+                                        </div>
+
+                                        <div class="radio-btn-col">
+                                            <a href="" class="add-option-btn red-btn btn">&plus; Add Option</a>
+                                        </div>
+                                        <div class="btn-col">
+                                            <a href="" class="cancel-btn back-dashboard constructor-btn"> Cancel </a>
+                                            <a href="" class="ok-btn btn red-btn constructor-btn">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-fields">
+                                    <div class="cur-employer-group form-group col-xs-12">
+                                        <label class="control-label">Current employer:</label>
+                                        <input tabindex="7" type="text" name="cur-employer" class="form-control">
+                                    </div>
+                                    <div class="employer-address-group form-group col-xs-12">
+                                        <label class="control-label">Employer address:</label>
+                                        <input tabindex="8" type="text" name="employer-address" class="form-control">
+                                    </div>
+                                    <div class="duration-group form-group col-xs-12">
+                                        <label class="control-label">How long?</label>
+                                        <input tabindex="9" type="text" name="duration" class="form-control">
+                                    </div>
+                                    <div class="phone-group form-group col-xs-12">
+                                        <label class="control-label">Phone:</label>
+                                        <input tabindex="10" type="tel" name="phone" class="form-control">
+                                    </div>
+                                    <div class="email-group form-group col-xs-12">
+                                        <label class="control-label">Email:</label>
+                                        <input tabindex="11" type="text" name="email" class="form-control">
+                                    </div>
+                                    <div class="fax-group form-group col-xs-12">
+                                        <label class="control-label">Fax:</label>
+                                        <input tabindex="12" type="text" name="fax" class="form-control">
+                                    </div>
+                                    <div class="city-group form-group col-xs-12">
+                                        <label class="control-label">City:</label>
+                                        <input tabindex="13" type="text" name="city" class="form-control">
+                                    </div>
+                                    <div class="state-group form-group col-xs-12">
+                                        <label class="control-label">State:</label>
+                                        <input tabindex="14" type="text" name="state" class="form-control">
+                                    </div>
+                                    <div class="zip-group form-group col-xs-12">
+                                        <label class="control-label">ZIP Code:</label>
+                                        <input tabindex="15" type="text" name="zip" class="form-control">
+                                    </div>
+                                    <div class="position-group form-group col-xs-12">
+                                        <label class="control-label">Position:</label>
+                                        <input tabindex="16" type="text" name="position" class="form-control">
+                                    </div>
+                                    <div class="own-rent-group form-group col-xs-12">
+                                        <div class="col-xs-6">
+                                            <input type="radio" name="hourly-salary" class="form-control radio-btn"
+                                                   id="hourly">
+                                            <label class="control-label" for="hourly">Hourly</label>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input type="radio" name="hourly-salary" class="form-control radio-btn"
+                                                   id="salary">
+                                            <label class="control-label" for="salary">Salary</label>
+                                        </div>
+                                    </div>
+                                    <div class="income-group form-group col-xs-12">
+                                        <label class="control-label">Annual income:</label>
+                                        <input tabindex="17" type="text" name="income" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group section-block emergency-contact-block" data-attribute="3">
+                            <div class="block-title">
+                                <a href="" class="delete-btn" data-toggle="modal"
+                                   data-target="#confirmation-popup">×</a>
+                                <span class="section-title">Emergency Contact</span>
+                                <input tabindex="18" type="text" class="form-control section-title-input">
+                                <span class="edit-section-btn"><span class="fa fa-pencil"></span>Edit</span>
+                                <a href="" class="cancel-btn title-btn"> Cancel </a>
+                                <a href="" class="ok-btn title-btn">Ok</a>
+                                <a href="" class="add-field-btn">&plus; Add Field</a>
+                            </div>
+                            <div class="col-xs-12 block-fields">
+                                <div class="constructor-col">
+                                    <div class="col-xs-6 dropdown-col">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true"><span
+                                                    class="select-container"></span></button>
+                                            <ul class="companions-list dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li class="">Text Field</li>
+                                                <li class="">Checkbox</li>
+                                                <li class="">Radio Button</li>
+                                                <li class="">File Field</li>
+                                            </ul>
+                                        </div>
+                                        <div class="option-col form-group">
+                                            <label class="control-label">Option <span
+                                                    class="option-counter">1</span>:</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 edit-col">
+
+                                        <div class="input-col">
+                                            <label class="control-label">Field Label</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+
+                                        <div class="radio-btn-col">
+                                            <a href="" class="add-option-btn red-btn btn">&plus; Add Option</a>
+                                        </div>
+                                        <div class="btn-col">
+                                            <a href="" class="cancel-btn back-dashboard constructor-btn"> Cancel </a>
+                                            <a href="" class="ok-btn btn red-btn constructor-btn">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-fields">
+                                    <div class="contact-name-group form-group col-xs-12">
+                                        <label class="control-label">Name of a person not residing with you:</label>
+                                        <input type="text" name="contact-name" class="form-control">
+                                    </div>
+                                    <div class="contact-address-group form-group col-xs-12">
+                                        <label class="control-label">Address:</label>
+                                        <input type="text" name="contact-address" class="form-control">
+                                    </div>
+                                    <div class="city-group form-group col-xs-12">
+                                        <label class="control-label">City:</label>
+                                        <input type="text" name="city" class="form-control">
+                                    </div>
+                                    <div class="state-group form-group col-xs-12">
+                                        <label class="control-label">State:</label>
+                                        <input type="text" name="state" class="form-control">
+                                    </div>
+                                    <div class="zip-group form-group col-xs-12">
+                                        <label class="control-label">ZIP Code:</label>
+                                        <input type="text" name="zip" class="form-control">
+                                    </div>
+                                    <div class="phone-group form-group col-xs-12">
+                                        <label class="control-label">Phone:</label>
+                                        <input type="tel" name="phone" class="form-control">
+                                    </div>
+                                    <div class="position-group form-group col-xs-12">
+                                        <label class="control-label">Relationship:</label>
+                                        <input type="text" name="position" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group section-block references-block" data-attribute="4">
+                            <div class="block-title">
+                                <a href="" class="delete-btn" data-toggle="modal"
+                                   data-target="#confirmation-popup">×</a>
+                                <span class="section-title">References</span>
+                                <input type="text" class="form-control section-title-input">
+                                <span class="edit-section-btn"><span class="fa fa-pencil"></span>Edit</span>
+                                <a href="" class="cancel-btn title-btn"> Cancel </a>
+                                <a href="" class="ok-btn title-btn">Ok</a>
+                                <a href="" class="add-field-btn">&plus; Add Field</a>
+                            </div>
+                            <div class="col-xs-12 block-fields">
+                                <div class="constructor-col">
+                                    <div class="col-xs-6 dropdown-col">
+                                        <div class="dropdown">
+                                            <button class="btn btn-default dropdown-toggle" type="button"
+                                                    id="dropdownMenu1"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="true"><span
+                                                    class="select-container"></span></button>
+                                            <ul class="companions-list dropdown-menu" aria-labelledby="dropdownMenu1">
+                                                <li class="">Text Field</li>
+                                                <li class="">Checkbox</li>
+                                                <li class="">Radio Button</li>
+                                                <li class="">File Field</li>
+                                            </ul>
+                                        </div>
+                                        <div class="option-col form-group">
+                                            <label class="control-label">Option <span
+                                                    class="option-counter">1</span>:</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 edit-col">
+
+                                        <div class="input-col">
+                                            <label class="control-label">Field Label</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+
+                                        <div class="radio-btn-col">
+                                            <a href="" class="add-option-btn red-btn btn">&plus; Add Option</a>
+                                        </div>
+                                        <div class="btn-col">
+                                            <a href="" class="cancel-btn back-dashboard constructor-btn"> Cancel </a>
+                                            <a href="" class="ok-btn btn red-btn constructor-btn">Add</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-fields">
+                                    <div class="name-group form-group col-xs-12">
+                                        <label class="control-label">Name:</label>
+                                        <input type="text" name="name" class="form-control">
+                                    </div>
+                                    <div class="address-group form-group col-xs-12">
+                                        <label class="control-label">Address:</label>
+                                        <input type="text" name="address" class="form-control">
+                                    </div>
+                                    <div class="phone-group form-group col-xs-12">
+                                        <label class="control-label">Phone:</label>
+                                        <input type="tel" name="phone" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group section-block agreement-block">
+                            <div class="col-xs-12 block-fields">
+                                <div class="agreement-group form-group col-xs-12">
+                                    <input type="checkbox" name="agreement" class="form-control checkbox-btn"
+                                           id="agreement-check">
+                                    <label class="control-label agreement-check" for="agreement-check">I authorize the
+                                        verification of the information provided on this form as to my credit and
+                                        employment. I have received a copy of this application.</label>
+
+                                    <div class="col-xs-6 sign-block">
+                                        <label class="control-label">Signature of applicant:</label>
+                                    </div>
+                                    <div class="col-xs-4 col-xs-offset-2">
+                                        <label class="control-label">Date:</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <div class="form-footer">
+                                    <a href="" class="add-section red-btn btn">+ Add Section</a>
+                                    <input class="form-control section-footer-input" type="text">
+
+                                    <div class="col-xs-12">
+                                        <button type="submit" class="btn btn-primary submit-popup-btn btn-footer">Add</button>
+                                        <a href="" class="cancel back-dashboard btn-footer">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="confirmation-popup" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title" id="my-modal-label"></h4>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this section?
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="cancel back-dashboard close" type="button" data-dismiss="modal"
+                           aria-hidden="true">Cancel</a>
+                        <a href="" class="btn red-btn yes-btn close" data-dismiss="modal" aria-hidden="true">Yes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container default-footer">
+        <div class="row">
+
+            <div class="col-md-3">
+                <h2>Company</h2>
+                <ul>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">How It Works</a></li>
+                    <li><a href="">Social Media</a></li>
+                    <li><a href="">FAQ</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Features</h2>
+                <ul>
+                    <li><a href="">Landlords</a></li>
+                    <li><a href="">Tenants</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Landlords</h2>
+                <ul>
+                    <li><a href="">Login</a></li>
+                    <li><a href="">Sign Up</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <h2>Tenants</h2>
+                <ul>
+                    <li><a href="">Refer a Landlord</a></li>
+                    <li><a href="">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mobile-footer">
+        <div class="row">
+
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Company<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">About Us</a></li>
+                                <li><a href="">How It Works</a></li>
+                                <li><a href="">Social Media</a></li>
+                                <li><a href="">FAQ</a></li>
+                                <li><a href="">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Features<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">Landlords</a></li>
+                                <li><a href="">Tenants</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Landlords<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">Login</a></li>
+                                <li><a href="">Sign Up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        <div class="panel-heading">
+                            <h2 class="panel-title">
+                                <span>Tenants<span class="accordion-plus">&plus;</span></span>
+                            </h2>
+                        </div>
+                    </a>
+
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li><a href="">Refer a Landlord</a></li>
+                                <li><a href="">Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="copyright-dark">
+        <div class="container">
+            <span class="copyright">&copy; Copyright <?php echo date('Y'); ?> eRentPay</span>
+            <ul class="copyright-links">
+                <li><a href="">Terms of Service</a>&nbsp; | &nbsp;</li>
+                <li><a href="">Privacy Policy</a>&nbsp; | &nbsp;</li>
+                <li><a href="">Site</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+<!-- Scripts -->
+<script type="text/javascript" src="../web/assets//scripts/main.min.js"></script>
+<!-- нужен для страницы конструктора -->
+<script src="../src/Erp/PropertyBundle/Resources/public/js/application.controller.js"></script>
+</body>
+</html>

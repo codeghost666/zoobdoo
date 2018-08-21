@@ -1,0 +1,54 @@
+{% import '::widgets/form_errors.html.twig' as form_custom_errors %}
+
+{{ form_start(form, { attr: {'class': 'form-horizontal'}, 'enctype': form_enctype(form)}) }}
+<div class="row">
+    <div class="form-group">
+        <div class="col-sm-6">
+            {{ form_label(form.landlordFirstName) }}
+            {{ form_widget(form.landlordFirstName) }}
+            {{ form_custom_errors.widget(form.landlordFirstName) }}
+        </div>
+        <div class="col-sm-6">
+            {{ form_label(form.landlordLastName) }}
+            {{ form_widget(form.landlordLastName) }}
+            {{ form_custom_errors.widget(form.landlordLastName) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            {{ form_label(form.landlordEmail) }}
+            {{ form_widget(form.landlordEmail) }}
+            {{ form_custom_errors.widget(form.landlordEmail) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            {{ form_label(form.tenantEmail) }}
+            {{ form_widget(form.tenantEmail) }}
+            {{ form_custom_errors.widget(form.tenantEmail) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="form-group">
+            {{ form_label(form.message) }}
+            {{ form_widget(form.message) }}
+            {{ form_custom_errors.widget(form.message) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <div class="button-wrap">
+                {{ form_widget(form.submit) }}
+            </div>
+        </div>
+    </div>
+</div>
+{{ form_end(form) }}

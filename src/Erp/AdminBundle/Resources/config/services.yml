@@ -1,0 +1,216 @@
+services:
+    sonata.page.admin.administrators:
+        class: Erp\AdminBundle\Admin\Administrators
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "User management", label: "Administrators" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\User
+            - ErpAdminBundle:CRUD
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:UserManagement:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:UserManagement:edit.html.twig]]
+
+    sonata.page.admin.managers:
+        class: Erp\AdminBundle\Admin\Managers
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "User management", label: "Managers" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\User
+            - ErpAdminBundle:CRUD
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:UserManagement:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:UserManagement:edit.html.twig]]
+
+    sonata.page.admin.tenants:
+        class: Erp\AdminBundle\Admin\Tenants
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "User management", label: "Tenants" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\User
+            - ErpAdminBundle:CRUD
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Tenants:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:UserManagement:edit.html.twig]]
+
+    sonata.page.admin.invite_tenant:
+        class: Erp\AdminBundle\Admin\InviteTenant
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "User management", label: "Invited Tenants" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\InvitedUser
+            - ErpAdminBundle:InviteTenant
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:InvitedTenants:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:InvitedTenants:edit.html.twig]]
+            - [ setTemplate, [delete, ErpAdminBundle:UserManagement:delete.html.twig]]
+
+    sonata.page.admin.properties:
+        class: Erp\AdminBundle\Admin\Properties
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Property management", label: "Properties" }
+        arguments:
+            - ~
+            - Erp\PropertyBundle\Entity\Property
+            - ErpAdminBundle:CRUD
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:PropertyManagement:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:PropertyManagement:edit.html.twig]]
+
+    sonata.page.admin.property_repost_requests:
+        class: Erp\AdminBundle\Admin\PropertyRepostRequests
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Property management", label: "Rental Listings Requests" }
+        arguments:
+            - ~
+            - Erp\PropertyBundle\Entity\PropertyRepostRequest
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:PropertyRepostRequests:edit.html.twig]]
+            - [ setTemplate, [delete, ErpAdminBundle:PropertyRepostRequests:delete.html.twig]]
+
+    sonata.page.admin.application_forms:
+        class: Erp\AdminBundle\Admin\ApplicationForms
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Property management", label: "Application Forms" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\UserDocument
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:ApplicationForm:list.html.twig]]
+
+    sonata.page.admin.fees:
+        class: Erp\AdminBundle\Admin\Fees
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Site Settings" }
+        arguments:
+            - ~
+            - Erp\CoreBundle\Entity\FeeOption
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:Options:edit.html.twig]]
+
+    sonata.page.admin.email_notifications:
+        class: Erp\AdminBundle\Admin\EmailNotifications
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Email templates" }
+        arguments:
+            - ~
+            - Erp\CoreBundle\Entity\EmailNotification
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:EmailNotifications:edit.html.twig]]
+
+    sonata.page.admin.static_pages:
+        class: Erp\AdminBundle\Admin\StaticPages
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Pages management", label: "Static pages" }
+        arguments:
+            - ~
+            - Erp\SiteBundle\Entity\StaticPage
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:Options:edit.html.twig]]
+
+    sonata.page.admin.homepage_slides:
+        class: Erp\AdminBundle\Admin\HomePageSlides
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Pages management", label: "Homepage slider" }
+        arguments:
+            - ~
+            - Erp\SiteBundle\Entity\HomePageSlider
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:HomePageSlider:edit.html.twig]]
+
+    sonata.page.admin.homepage_content:
+        class: Erp\AdminBundle\Admin\HomePageContent
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Pages management", label: "Homepage content" }
+        arguments:
+            - ~
+            - Erp\SiteBundle\Entity\HomePageContent
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:HomePageContent:edit.html.twig]]
+
+    sonata.page.admin.contact_page_requests:
+        class: Erp\AdminBundle\Admin\ContactPageRequests
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Pages management", label: "Contact page requests" }
+        arguments:
+            - ~
+            - Erp\SiteBundle\Entity\ContactPageRequest
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:ContactPageRequest:edit.html.twig]]
+            - [ setTemplate, [delete, ErpAdminBundle:ContactPageRequest:delete.html.twig]]
+
+    sonata.page.admin.proconsultants:
+        class: Erp\AdminBundle\Admin\ProConsultant
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Ask a Pro", label: "Consultants" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\ProConsultant
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:CRUD:edit.html.twig]]
+
+    sonata.page.admin.prorequests:
+        class: Erp\AdminBundle\Admin\ProRequest
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Ask a Pro", label: "Requests" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\ProRequest
+            - ErpAdminBundle:CRUD
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:CRUD:edit.html.twig]]
+            - [ setTemplate, [delete, ErpAdminBundle:CRUD:delete.html.twig]]
+
+    sonata.page.admin.proreports:
+        class: Erp\AdminBundle\Admin\ProReport
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Ask a Pro", label: "Referral Report" }
+        arguments:
+            - ~
+            - Erp\UserBundle\Entity\ProReport
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+
+    sonata.page.admin.paysimplehistory:
+        class: Erp\AdminBundle\Admin\PaySimpleHistory
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Reports", label: "Transactions" }
+        arguments:
+            - ~
+            - Erp\PaymentBundle\Entity\PaySimpleHistory
+            - ~
+        calls:
+            - [ setTemplate, [list, ErpAdminBundle:Options:list.html.twig]]
+            - [ setTemplate, [edit, ErpAdminBundle:PaySimpleHistory:edit.html.twig]]
+
+    sonata.page.admin.unit_settints:
+        class: Erp\AdminBundle\Admin\UnitSettings
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Options", label: "Charging/Fees" }
+        arguments:
+            - ~
+            - Erp\PaymentBundle\Entity\UnitSettings
+            - ~
+            - '@old_sound_rabbit_mq.update_subscriptions_producer'

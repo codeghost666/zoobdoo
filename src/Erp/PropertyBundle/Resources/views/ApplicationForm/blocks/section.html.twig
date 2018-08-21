@@ -1,0 +1,66 @@
+<div class="form-group section-block app-info-block" data-section-id="{{ applicationSection.id }}"
+     data-attribute="{{ applicationSection.id }}">
+    <div class="block-title">
+        <a role="popup" href="{{ path('erp_property_application_remove_section', {'propertyId':propertyId, 'sectionId':applicationSection.id}) }}" class="delete-btn">
+			×
+		</a>
+        <span class="section-title">{{ applicationSection.name }}</span>
+        <input type="text" class="form-control section-title-input">
+
+        <div class="btn-title-wrap">
+            <span class="edit-section-btn"><span class="fa fa-pencil"></span>Edit</span>
+            <a href="#" class="cancel-btn title-btn"> Cancel </a>
+            <a href="#"
+               data-href="{{ path('erp_property_application_update_section', {'propertyId':propertyId, 'sectionId':applicationSection.id}) }}"
+               class="ok-btn title-btn">Ok</a>
+            <a href="#" class="add-field-btn">&plus; Add Field</a>
+        </div>
+    </div>
+    <div class="col-xs-12 block-fields">
+        <div class="constructor-col">
+            <div class="col-xs-6 dropdown-col">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button"
+                            id="dropdownMenu{{ applicationSection.id }}" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="true"><span class="select-container"></span></button>
+                    <ul class="companions-list dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li data-type="{{ constant('Erp\\PropertyBundle\\Entity\\ApplicationField::TYPE_TEXT') }}">Text
+                            Field
+                        </li>
+                        <li data-type="{{ constant('Erp\\PropertyBundle\\Entity\\ApplicationField::TYPE_CHECKBOX') }}">
+                            Checkbox
+                        </li>
+                        <li data-type="{{ constant('Erp\\PropertyBundle\\Entity\\ApplicationField::TYPE_RADIO') }}">
+                            Radio Button
+                        </li>
+                        <li data-type="{{ constant('Erp\\PropertyBundle\\Entity\\ApplicationField::TYPE_FILE') }}">File
+                            Field
+                        </li>
+                    </ul>
+                </div>
+                <div class="option-col form-group">
+                    <label class="control-label">Option <span class="option-counter">1</span>:</label>
+                    <input type="text" class="form-control option-title-input">
+                </div>
+            </div>
+            <div class="col-xs-6 edit-col">
+                <div class="input-col">
+                    <label class="control-label">Field Label</label>
+                    <input type="text" class="form-control field-title-input">
+                </div>
+                <div class="radio-btn-col">
+                    <a href="#" class="add-option-btn red-btn btn">&plus; Add Option</a>
+                </div>
+                <div class="btn-col">
+                    <a href="#" class="cancel-btn back-dashboard constructor-btn"> Cancel </a>
+                    <a href="#"
+                       data-href="{{ path('erp_property_application_add_field', {'propertyId':propertyId, 'sectionId':applicationSection.id}) }}"
+                       class="ok-btn btn red-btn constructor-btn">Add</a>
+                </div>
+            </div>
+        </div>
+        {% for field in applicationSection.applicationFields %}
+        {% include('ErpPropertyBundle:ApplicationForm/fields/constructor:' ~ field.type ~ '-field.html.twig') %}
+        {% endfor %}
+    </div>
+</div>

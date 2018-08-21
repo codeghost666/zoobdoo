@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <div class="col-md-12">
+        <div id="properties-settings">
+            {{ form_start(form, {'action': path('erp_property_choose_properties'), 'attr': {'class': 'payment-calendar', 'novalidate': 'novalidate'}}) }}
+
+            {% if error is defined and error %}
+                <div>{{ error }}</div>
+            {% endif %}
+            {{ form_row(form.dayUntilDue) }}
+            {{ form_row(form.paymentAmount) }}
+            {{ form_row(form.allowPartialPayments) }}
+            {{ form_row(form.allowCreditCardPayments) }}
+            {{ form_row(form.allowAutoDraft) }}
+            <div class="text-right">
+                <button
+                        url="{{ path('erp_property_choose_properties') }}"
+                        type="submit"
+                        class="btn edit-btn"
+                        step="properties-table"
+                        role="next"
+                >
+                    Next
+                </button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+{% extends 'ErpNotificationBundle::base.html.twig' %}
+
+{% block pageContent %}
+    {{ parent() }}
+    <section id="managers-profile" class="profile">
+        <div class="container">
+            {% include "ErpNotificationBundle:Template:actions.html.twig" %}
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+            <div class="row">
+                <div class="title-block">
+                    {%- set title -%}
+                        {%- if entity.id -%}
+                            Edit template {{ entity.title }}
+                        {%- else -%}
+                            Create template
+                        {%- endif -%}
+                    {%- endset -%}
+
+                    <h1 class="bold-text">{{ title }}</h1>
+                </div>
+            </div>
+
+            {%- set action -%}
+                {%- if entity.id -%}
+                    {{ path('erp_notification_template_update', {'id': entity.id}) }}
+                {%- else -%}
+                    {{ path('erp_notification_template_create') }}
+                {%- endif -%}
+            {%- endset -%}
+
+            {{ form_start(form, {'action': action}) }}
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="notification-template-nav">
+                        <div class="form-group">
+                            {{ form_label(form.title, null, {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(form.title, {'attr': {'class': 'form-control col-xs-12'}}) }}
+                            {{ form_errors(form.title) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="notification-template-nav">
+                        <div class="form-group">
+                            {{ form_label(form.type, null, {'label_attr': {'class': 'control-label'}}) }}
+                            {{ form_widget(form.type, {'attr': {'class': 'form-control col-xs-12'}}) }}
+                            {{ form_errors(form.type) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="notification-template-nav">
+                <div class="form-group">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description) }}
+                    {{ form_errors(form.description) }}
+                </div>
+            </div>
+            {{ form_widget(form.submit, {'attr': {'class': 'btn edit-btn'}}) }}
+            {{ form_end(form) }}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,111 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    {% set cc = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::CREDIT_CARD') %}
+    {% set ba = constant('Erp\\PaymentBundle\\PaySimple\\Managers\\PaySimpleManagerInterface::BANK_ACCOUNT') %}
+    {% set psCustomer = user.getPaySimpleCustomers()|length ? user.getPaySimpleCustomers().first : null %}
+
+    <section id="managers-profile" class="profile">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <!--  {% if user.stripeAccount is defined %}
+                    {% if user.stripeAccount.accountId %}
+                     Account ID: {{ user.stripeAccount.accountId }}
+                    {% endif %}
+                    {% endif %} -->
+
+                        <h1 class="bold-text">Your Profile</h1>
+                    </div>
+                </div>
+
+                {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+                <div class="row profile-widget-row">
+                    
+                    <div class="col-md-3 col-xs-12 profile-widget-item">
+                        <div class="row widget-title-row">
+                            <div class="login-block-title bold-text">Account Login Details</div>
+                        </div>
+                        <div class="row login-row">
+
+                            <div class="account-photo">
+                                {% if user.image %}
+                                    <img src="{{ asset(user.image.path ~ '/' ~ user.image.name) | imagine_filter('profile_image') }}"/>
+                                {% else %}
+                                    <img src="{{ asset('assets/images/profile/User.png') }}"/>
+                                {% endif %}
+                            </div>
+
+                            <div class="account-info-block">
+                                <div class="account-info">
+                                    <span class="account-icon icon-user"></span>
+                                    <span class="account-name">{{ user.firstName }}</span>
+                                </div>
+                                <div class="account-info">
+                                    <span class="account-icon icon-lock"></span>
+                                    <span class="account-name">****</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row edit-row">
+                            <a class="btn edit-btn" href="{{ path('erp_user_details') }}">edit</a>
+                        </div>
+                        <hr>
+                        <div class="question-mark">
+                            <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'account_login_details'}) }}">&#063;</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-3 col-xs-12 profile-widget-item">
+                        <div class="row widget-title-row">
+                            <div class="login-block-title bold-text">Address Details</div>
+                        </div>
+                        <div class="address-details-block">
+                            <span class="address-details street-details">{{ user.addressOne }}</span>
+                            <span class="address-details city-details">{{ user.addressTwo }}</span>
+
+                            <div class="primary-address">Primary, Billing Address</div>
+                        </div>
+                        <div class="row edit-row address-edit-row">
+                            <a class="btn edit-btn" href="{{ path('erp_user_address_details') }}">edit</a>
+                        </div>
+                        <hr>
+                        <div class="question-mark">
+                            <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'address_details'}) }}">&#063;</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-offset-1 col-md-3 col-xs-12 profile-widget-item">
+                        <div class="row widget-title-row">
+                            <div class="login-block-title bold-text">Email Options</div>
+                        </div>
+                        <div class="email-block">
+                            <div class="email-row">
+                                <span class="fa fa-envelope-o"></span>
+                                <span class="email-details" title="{{ user.email }}">{{ user.email }}</span>
+                                <div class="primary-email">Primary, Email</div>
+                            </div>
+                            {% if user.secondEmail %}
+                                <div class="email-row">
+                                    <span class="fa fa-envelope-o"></span>
+                                    <span class="email-details" title="{{ user.secondEmail }}">{{ user.secondEmail }}</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="row edit-row">
+                            <a class="btn edit-btn" href="{{ path('erp_user_email_options') }}">edit</a>
+                        </div>
+                        <hr>
+                        <div class="question-mark">
+                            <a role="popup" href="{{ path('erp_user_profile_hint_content', {'hintCode':'email_options'}) }}">&#063;</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+{% endblock %}

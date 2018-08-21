@@ -1,0 +1,79 @@
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#secondary-profile-navbar" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <span class="page-title navbar-toggle collapsed" data-toggle="collapse" data-target="#secondary-profile-navbar"
+          aria-expanded="false">Account Management</span>
+</div>
+<div class="collapse navbar-collapse white-navbar" id="secondary-profile-navbar">
+    <ul class="nav navbar-nav">
+        <li class="menu-item{{ currentRoute == 'erp_user_dashboard_dashboard' ? ' current' : ''}}">
+            <a href="{{ path('erp_user_dashboard_dashboard') }}">Dashboard</a>
+            <span class="secondary-menu-icon dashboard-icon"></span>
+        </li>
+
+        {% set availRoutes = ['erp_property_listings_all', 'erp_property_listings_add', 'erp_property_listings_edit', 'erp_property_listings_legal', 'erp_notification_template_list'] %}
+
+        <li class="menu-item dropdown {{ (currentRoute in availRoutes) ? ' current' : ''}}">
+            <span class="secondary-menu-icon listings-icon"></span>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listings <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li class="menu-item2{{ currentRoute == 'erp_property_listings_all' ? ' current' : ''}}">
+                    <span class="secondary-menu-icon listings-icon"></span>
+                    <a href="{{ path('erp_property_listings_all') }}">Listings</a>
+                </li>
+                <li class="menu-item2{{ currentRoute == 'erp_property_listings_legal' ? ' current' : ''}}">
+                    <i class="fa fa-bell-o special-icons" aria-hidden="true"></i>
+                    <a href="{{ path('erp_notification_template_list') }}">Set alerts</a>
+                </li>
+                <!-- <li class="menu-item2{{ currentRoute == 'erp_property_listings_legal' ? ' current' : ''}}">
+                    <i class="fa fa-balance-scale special-icons" aria-hidden="true"></i>
+                    <a href="#{# path('erp_property_listings_legal') #}">Legal info</a>
+                </li> //-->
+            </ul>
+        </li>
+
+        <li class="menu-item{{ currentRoute == 'erp_user_accounting_index' ? ' current' : ''}}">
+            <span class="secondary-menu-icon accounting-icon"></span>
+            <a href="{{ path('erp_user_accounting_index') }}">Accounting</a>
+        </li>
+
+        <li class="menu-item{{ currentRoute == 'erp_user_documentation' ? ' current' : ''}}">
+            <span class="secondary-menu-icon documentation-icon"></span>
+            <a href="{{ path('erp_user_documentation') }}">Documentation</a>
+        </li>
+
+
+        <li class="menu-item{{ currentRoute == 'erp_user_service_request' ? ' current' : ''}}">
+            <span class="secondary-menu-icon service-icon"></span>
+            <a href="{{ path('erp_user_service_request') }}">Service Requests</a>
+        </li>
+
+        <li class="menu-item{{ currentRoute == 'erp_user_profile_forum_index' ? ' current' : ''}}">
+            <span class="secondary-menu-icon forum-icon"></span>
+            <a href="{{ path('erp_user_profile_forum_index') }}">Manager Forum</a>
+        </li>
+
+        <li class="menu-item{{ currentRoute == 'erp_user_settings' ? ' current' : ''}}">
+            <span class="secondary-menu-icon settings-icon"></span>
+            <a href="{{ path('erp_user_settings') }}">Settings</a>
+        </li>
+
+        <li class="menu-item{{ currentRoute == 'fos_user_profile_show' ? ' current' : ''}}">
+            <span class="secondary-menu-icon profile-icon"></span>
+            <a href="{{ path('erp_user_profile_dashboard') }}">Profile</a>
+        </li>
+
+        <li class="menu-item{{ currentRoute == 'erp_user_messages' ? ' current' : ''}}">
+            <span class="secondary-menu-icon messages-icon"></span>
+            {% if count_unread_messages(app.user) %}
+                <div class="messages-count-icon">
+                    <span class="messages-count">{{ count_unread_messages(app.user) }}</span>
+                </div>
+            {% endif %}
+            <a href="{{ path('erp_user_messages') }}">Messages</a>
+        </li>
+    </ul>
+</div>

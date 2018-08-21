@@ -1,0 +1,128 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('bundles/erpcore/js/fine-uploader/fine-uploader-new.css') }}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block paramsToJs %}
+    <input type="hidden" id="document-count" value="{{ property.getId() ? property.getDocuments()|length : 1 }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/upload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpcore/js/file-validator.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpproperty/js/property-edit.controller.js') }}"></script>
+{% endblock %}
+
+{% block pageContent %}
+    {{ parent() }}
+<div class="page-content">
+    <section id="managers-listings-edit" class="listings profile">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Documentation</h1>
+                </div>
+            </div>
+
+            <div class="row text-center">
+                <div class="col-xs-12 features property-tab">
+                    <a class="btn red-btn tab-btn" href="{{ path('erp_property_listings_edit', {'propertyId': property.id}) }}">Property Details</a>
+                    <a class="btn red-btn tab-btn" href="{{ path('erp_property_property_settings_edit', {'propertyId': property.id}) }}">Edit Payment Settings</a>
+                    <a class="btn red-btn tab-btn" href="{{ path('erp_property_listings_edit_images', {'propertyId': property.id}) }}">Property Images</a>
+                    <a class="btn red-btn tab-btn active" href="{{ path('erp_property_listings_edit_documents', {'propertyId': property.id}) }}">Property Documents</a>
+                </div>
+            </div>
+
+            {% include "ErpCoreBundle:crossBlocks:message.html.twig" with {'alert_ok' : 'alert_ok', 'alert_error' : 'alert_error'} %}
+
+            <div class="row">
+                {% form_theme form '@ErpUser/Form/form_upload.html.twig' %}
+                {{ form_start(form, { attr: {'id' : 'property-edit-form', 'class': 'form-horizontal'}, 'enctype': form_enctype(form)}) }}
+                <input type="hidden" id="document-data-prototype" class="file-input" value="{{ form_widget(form.documents.vars.prototype)|e }}"/>
+                <div class="col-md-10 col-md-offset-1 listings-block">
+                    <div class="listing-block">
+                        <div class="desc-block">
+                            <div class="listing-form form-horizontal">
+                                <h3 class="property-name">{{ property.name }}</h3>
+                                <div class="documentation-block">
+                                    <div class="errors documentation-errors">{{ form_custom_errors.widget(form) }}</div>
+                                    {% if not property.getDocuments()|length %}
+                                        <span class="property-doc-details">No documents uploaded</span>
+                                    {% endif %}
+                                    <ul class="doc-col" id="document-fields-list">
+                                        {% for documentField in form.documents %}
+                                            {{ form_custom_errors.widget(documentField.file) }}
+                                            {{ form_custom_errors.widget(documentField.originalName) }}
+                                        {% endfor %}
+                                        {% for document in property.getDocuments() %}
+                                            {% if document.id %}
+                                                <li class="doc-property-item">
+                                                    <span class="fa fa-file-o"></span>
+
+                                                    <div class="property-doc-info">
+                                                        <a target="_blank" href="{{ asset(document.getPath() ~ '/' ~ document.getName()) }}">{{ document.getOriginalName() }}</a>
+                                                        <span class="property-doc-details">{{ document.getExtension() }}, {{ document.getFileSize(true) }}</span>
+                                                    </div>
+                                                    <span class="doc-delete" data-doc-attr-count="{{ loop.index - 1 }}">X</span>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    <div class="edit-row">
+                                        <a href="#" class="btn edit-btn" id="add-another-document">ADD+</a>
+                                    </div>
+
+                                    <div class="hide">
+                                        <ul>
+                                            {% for documentField in form.documents %}
+                                                <li id="new-form-doc-field-{{ loop.index - 1 }}">
+                                                    {{ form_widget(documentField) }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 link-col">
+                                <ul>
+                                    <li><a class="red-link" href="{{ path('erp_property_application_form', {'propertyId':property.id}) }}">
+                                            {% if property.applicationForm.id is defined %}
+                                                Edit
+                                            {% else %}
+                                                Create
+                                            {% endif %}
+                                            Online Application Form</a>
+                                    {% if property.applicationForm.id is defined %}
+                                        &nbsp;|&nbsp;<a href="{{ path('erp_property_application_form_copy_list',{'propertyId':property.id}) }}" type="submit" role="popup" class="red-link">Copy this Application Form to other properties</a>
+                                    {% endif %}
+                                    </li>
+
+                                    <li><a class="red-link" href="{{ path('erp_property_contract_form', {'propertyId':property.id}) }}">
+                                            {% if property.contractForm.id is defined %}
+                                                Edit
+                                            {% else %}
+                                                Create
+                                            {% endif %}
+                                            Online Contract Form</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 submit-row">
+                    <a class="back-dashboard listings-back" href="{{ path('erp_property_listings_all', {'page': page}) }}">Back to Listings</a>
+                    {{ form_widget(form.submit) }}
+                </div>
+                <div class="hidden">
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends '::base.html.twig' %}
+
+{% set headerWhiteClass = true %}
+
+{% if page is defined %}
+    {% set metaTitle = page.metaTitle %}
+    {% set metaDescription = page.metaDescription %}
+{% endif %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

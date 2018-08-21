@@ -1,0 +1,22 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <section id="register-form-tenants" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Email Options</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {% include "ErpUserBundle:Profile:email-options-form.html.twig" %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

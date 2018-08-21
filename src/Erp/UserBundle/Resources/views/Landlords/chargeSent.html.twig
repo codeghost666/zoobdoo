@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col-md-12">
+            <p>
+                Emails with valid charges have been sent to {{ emailsTo['success']|join(', ') }}.
+            </p>
+            {% if emailsTo['error']|length > 0 %}
+                <p>
+                    Problems incurred when generating charges / sending emails with the following users:
+                    {{ emailsTo['error']|join(', ') }}. Please, try later for these users.
+                </p>
+            {% endif %}
+        </div>
+        <button type="button" class="btn red-btn btn-space" data-dismiss="modal" aria-hidden="true" onclick="javascript:window.location.reload();">OK</button>
+    </div>
+</div>
+

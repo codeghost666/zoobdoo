@@ -1,0 +1,3 @@
+erp_core_city:
+    resource: "@ErpCoreBundle/Resources/config/routing/city.yml"
+    prefix:   /city

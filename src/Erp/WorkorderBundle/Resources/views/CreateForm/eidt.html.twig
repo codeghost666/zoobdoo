@@ -1,0 +1,214 @@
+{% extends 'ErpUserBundle:Profile:base.html.twig' %}
+
+{% block javascripts %}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/erpworkorder/css/demos.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/erpworkorder/css/jsgrid.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/erpworkorder/css/theme.css') }}" />
+
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/jsgrid.core.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/jsgrid.load-indicator.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/jsgrid.load-strategies.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/jsgrid.sort-strategies.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/jsgrid.validation.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/jsgrid.field.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/fields/jsgrid.field.text.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/fields/jsgrid.field.number.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/fields/jsgrid.field.select.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/fields/jsgrid.field.checkbox.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/fields/jsgrid.field.control.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/erpworkorder/js/main.js') }}"></script>
+    {{ parent() }}
+
+{% endblock %}
+
+
+
+{% block pageContent %}
+
+    {{ parent() }}
+
+    <style>
+        .config-panel {
+            padding: 10px;
+            margin: 10px 0;
+            background: #fcfcfc;
+            border: 1px solid #e9e9e9;
+            display: inline-block;
+        }
+
+        .config-panel label {
+            margin-right: 10px;
+        }
+
+        .custom-combobox {
+            position: relative;
+            display: inline-block;
+        }
+        .custom-combobox-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+        }
+        .custom-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+        }
+
+        .ui-draggable, .ui-droppable {
+            background-position: top;
+        }
+    </style>
+
+    <section id="register-form-tenants" class="register-form">
+        <div class="container">
+            <div class="row">
+                <div class="title-block">
+                    <h1 class="bold-text">Creating Work Order</h1>
+                    <h2 class="bold-text" style="color:#ca171b">No&nbsp;:&nbsp;&nbsp;{{ workorderId }}</h2>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    {{ form_start(form, { attr: {'class': 'form-horizontal'}}) }}
+                    <div class="row">
+                        <div class="form-group text-left">
+                            <div class="col-xs-6">
+                                {{ form_label(form.createdDate) }}
+                                {{ form_widget(form.createdDate, {'attr': {'class': 'form-control date'}}) }}
+                                {{ form_custom_errors.widget(form.createdDate) }}
+                            </div>
+
+                            <div class="col-xs-6">
+                                {{ form_label(form.status) }}
+                                <div class="select-container dropdown">
+                                    {{ form_widget(form.status) }}
+                                </div>
+                                {{ form_custom_errors.widget(form.status) }}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group text-left">
+                            <div class="col-xs-6">
+                                {{ form_label(form.service) }}
+                                <div class="select-container dropdown">
+                                    {{ form_widget(form.service) }}
+                                </div>
+                                {{ form_custom_errors.widget(form.service) }}
+                            </div>
+                            <div class="col-xs-6">
+                                {{ form_label(form.currency) }}
+                                <div class="select-container dropdown">
+                                    {{ form_widget(form.currency) }}
+                                </div>
+                                {{ form_custom_errors.widget(form.currency) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group text-left">
+                            <div class="col-xs-12">
+                                {{ form_label(form.contractor) }}
+                                <div class="select-container dropdown">
+                                    {{ form_widget(form.contractor) }}
+                                </div>
+                                {{ form_custom_errors.widget(form.contractor) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group text-left">
+                            <div class="col-xs-6">
+                                {{ form_label(form.severity) }}
+                                <div class="select-container dropdown">
+                                    {{ form_widget(form.severity) }}
+                                </div>
+                                {{ form_custom_errors.widget(form.severity) }}
+                            </div>
+                            <div class="col-xs-6">
+                                {{ form_label(form.urgency) }}
+                                <div class="select-container dropdown">
+                                    {{ form_widget(form.urgency) }}
+                                </div>
+                                {{ form_custom_errors.widget(form.urgency) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group text-left">
+                            <div class="col-xs-12">
+                                {{ form_label(form.description) }}
+                                {{ form_widget(form.description) }}
+                                {{ form_custom_errors.widget(form.description) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group text-left">
+                            <div class="col-xs-6">
+                                {{ form_label(form.serviceDate) }}
+                                {{ form_widget(form.serviceDate, {'attr': {'class': 'form-control date'}}) }}
+                                {{ form_custom_errors.widget(form.serviceDate) }}
+                            </div>
+                            <div class="col-xs-6">
+                                {{ form_label(form.serviceTime) }}
+                                {{ form_widget(form.serviceTime) }}
+                                {{ form_custom_errors.widget(form.serviceTime) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ form_widget(form.manager) }}
+
+                    <div class="row text-center" style="height:350px; padding-top: 30px">
+                        <div class="col-md-12" style="height:100%">
+                            <div id="jsGrid"></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-xs-4 text-right">
+                                <div id="sub_total">Sub Total : 0.00 USD</div>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                                <div id="tax_total">Tax(10%) : 0.00 USD</div>
+                            </div>
+                            <div class="col-xs-4 text-left">
+                                <div id="total">Total : 0.00 USD</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-footer">
+                                <a class="back-dashboard" href="{{ path('erp_workorder_index') }}">Back to Dashboard</a>
+                                {{ form_widget(form.save) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="serviceData" name="serviceData" value="" />
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}
